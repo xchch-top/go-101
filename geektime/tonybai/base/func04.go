@@ -1,6 +1,6 @@
 package main
 
-import "xchch.top/go-101/geektime/tonybai/util"
+import "gitlab.xchch.top/zhangsai/go-101/geektime/tonybai/method"
 
 type Interface interface {
 	M1()
@@ -42,12 +42,12 @@ func test05() {
 // - M4
 func test06() {
 	var n int
-	util.DumpMethodSet(n)
-	util.DumpMethodSet(&n)
+	method.DumpMethodSet(n)
+	method.DumpMethodSet(&n)
 
 	var t3 T3
-	util.DumpMethodSet(t3)
-	util.DumpMethodSet(&t3)
+	method.DumpMethodSet(t3)
+	method.DumpMethodSet(&t3)
 }
 
 type T3 struct{}
@@ -67,6 +67,6 @@ func test07() {
 	var t T2
 	var pt *T2
 
-	util.DumpMethodSet(t)
-	util.DumpMethodSet(pt)
+	method.DumpMethodSet(t)
+	method.DumpMethodSet(pt)
 }

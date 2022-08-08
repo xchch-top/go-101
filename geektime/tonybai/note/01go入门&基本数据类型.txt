@@ -1,24 +1,30 @@
 go语言的设计哲学:简单,显式,组合,并发,面向工程.
 
-go env 和 go help environment 
+go env
     https://static001.geekbang.org/resource/image/ba/96/ba6990798fb17fc18386749f9cce2c96.jpg
+go help environment
 
-go源文件总是用全小写字母形式的短小单词命名, 并且以.go扩展名结尾
-
+go源文件总是用全小写字母形式的短小单词命名, 并且以.go扩展名结尾, 例如helloworld.go
+整个go程序中仅允许有一个main包
+go是一种编译型语言, 意味着, 只有你编译完go程序后, 才可以将生成的可执行文件交付与其他人, 并运行在没有安装go的环境中
 go代码风格使用Tab而不是空格来实现缩进, go源码文件本身采用的是Unicode字符集, 而且用的是UTF-8标准的字符编码方式
 
 在go 1.16版本中, go module已经成为了go默认的包依赖管理机制和go源码构建机制. go module的核心是一个名为go.mod的文件, 文件中存储了module对第三方依赖的全部信息
 go.sum记录了直接依赖和间接依赖的版本的hash, 用来校验本地宝的真实性, 在构建的时候, 如果本地依赖包的hash值和go.sum中记录的不一致, 会被拒绝构建
+go程序的构建过程就是确定包版本, 编译以及将编译后的目标文件链接在一起的过程
 
-添加go mod文件 go mod init xchch.top/go-101
+添加go mod文件 go mod init gitlab.xchch.top/zhangsai/go-101
 手动添加依赖 go get github.com/valyala/fasthttp
 工具自动添加依赖 go mod tidy
+go mod tidy 下载的依赖module会放在本地的module缓存路径下, 变量值为$GOPATH[0]/pkg/mod, go1.15后可以通过GOMODCACHE环境变量自定义本地module的缓存路径
 
-go语言类型零值 
-    https://static001.geekbang.org/resource/image/92/23/92242134ff5ccdaed32854d01690ab23.jpg
+go module的最小版本使用原则: A明明说只要求C v1.1.0, B明明说只要求C v1.3.0, go会在改项目依赖的所有版本中, 选出符合项目整体需求的最小版本
+go团队认为最小版本选择, 为go程序实现持久的和可重现的构建提供了最佳的方案
+
+go语言变量初始为类型零值
+go语言类型零值 https://static001.geekbang.org/resource/image/92/23/92242134ff5ccdaed32854d01690ab23.jpg
 
 go字符串中的每个字符都是一个Unicode字符, 并且这些Unicode字符是以UTF-8格式存储在内存当中的.
-
 go字符串组成的两种视角: 字节视角、字符视角
 
 rune本质上是int32类型的别名类型, type rune = int32

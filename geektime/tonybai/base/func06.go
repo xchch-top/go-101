@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"xchch.top/go-101/geektime/tonybai/util"
+	"gitlab.xchch.top/zhangsai/go-101/geektime/tonybai/method"
 )
 
 func main() {
@@ -79,6 +79,6 @@ func test12() {
 
 	// 类型T的方法集合 = T62的方法集合 + *T63的方法集合
 	// 类型*T的方法集合 = *T62的方法集合 + *T63的方法集合
-	util.DumpMethodSet(t)
-	util.DumpMethodSet(&t)
+	method.DumpMethodSet(t)
+	method.DumpMethodSet(&t)
 }

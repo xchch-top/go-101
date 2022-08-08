@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
+	"gitlab.xchch.top/zhangsai/go-101/geektime/tonybai/method"
 	"io"
 	"strings"
-	"xchch.top/go-101/geektime/tonybai/util"
 )
 
 type MyInt int
@@ -102,6 +102,6 @@ func (T5) M3() {}
 func test10() {
 	var t T5
 	var p *T5
-	util.DumpMethodSet(t)
-	util.DumpMethodSet(p)
+	method.DumpMethodSet(t)
+	method.DumpMethodSet(p)
 }
