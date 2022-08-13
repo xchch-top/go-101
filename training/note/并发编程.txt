@@ -1,0 +1,54 @@
+context: 用于父子协程间的数据传递
+context包的核心api有四个: context.WithValue, context.WithCancel, context.WithDeadline, context.WithTimeout
+context实例是不可变的, 每一次都是新创建的
+go语言中没有ThreadLocal, goroutine中操作的是协程, go的设计者不打算支持ThreadLocal
+
+Context接口核心四个api
+Deadline: 返回过期时间, 如果ok为false, 说明没有设置过期时间 -- 不常用
+Done: 返回一个channel, 一般用于监听Context实例的信号, 比如说过期, 或者正常关闭 -- 常用
+Err: 返回一个错误用于表示Context发生了什么, Canceled ==> 正常关闭, DeadlineExceeded ==> 过期超时 -- 比较常用
+context.Value: 取值, 非常常用
+
+context包我们就用来做两件事情: ①安全传递数据 ②控制链路
+
+安全数据传递
+安全传递数据: 是指在请求执行上下文中安全地传递数据, 依赖于WithValue方法, 因为Go本身没有ThreadLocal机制, 所以大部分类似功能都是借助于context来实现的
+父子关系: context的实例之间存在父子关系, ①当父亲取消或者超时, 所有派生的子context都会被取消或者超时, ②当没有找到key的时候, 子context先看自己有没有, 没有则去祖先里面去找
+context的使用场景: ①链路追踪的traceId ②AB测试的标记位 ③压力测试标记位 ④分布分表中间件中传递sharding hint ⑤ORM中间件传递SQL hint ⑥Web框架传递上下文
+
+valueCtx
+典型的装饰器模式: 在已有Context的基础上附加一个存储key-value的功能
+只能存储一个 key-value, 为什么不用map?
+    map要求key是comparable, 而我们可能用不是comparable的key
+    context包的设计理念就是将context设计成不可变
+
+控制链路
+context包提供了三个控制方法: WithCancel, WithDeadline, WithTimeout, 三者用法大同小异
+    ①没有过期时间, 但是又需要在必要的时候取消,  使用WithCancel
+    ②在固定时间点过期, 使用WithDeadline
+    ③在一段时间后过期, 使用WithTimeout
+父context可以控制子context, 但是子context控制不了父context
+
+time.AfterFunc
+另外一种超时控制是采用time.AfterFunc: 一般这种方法我们会认为是定时任务, 而不是超时控制
+这种超时控制的两个弊端: ①如果不主动取消, 那么AfterFunc是必然会执行的 ②如果主动取消, 那么在业务正常结束到主动取消之间, 有一个短的时间差
+
+context的源码案例
+DB.conn 控制超时
+    超时控制至少两个分支: 超时分支 正常业务分支, context.Context会和select-case一起使用
+http.Request使用context作为字段
+    http.Request本身就是 request-scope的, http.Request里面的ctx依旧设计为不可变的, 我们只能创建一个新的http.Request
+    实际上我们没有方法修改一个已有的http.Request里面的ctx
+errGroup.WithContext利用context来传递信号
+cancelCtx
+
+context包使用规范
+一般只用作方法参数, 而且是作为第一个参数
+所有公共方法, 除非是util, helper之类的方法, 否则都加上context参数
+不要用作结构体字段, 除非你的结构体本身也是表达一个上下文的概念
+
+context包 -- 面试要点
+context.Context使用场景: 上下文传递和超时控制
+context.Context原理
+    父亲如何控制儿子: 通过儿子主动加入到父亲的children里, 父亲只需要遍历就可以
+    valueCtx和timerCtx的原理
