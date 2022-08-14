@@ -1,3 +1,7 @@
+# 并发编程
+
+## context包
+
 context: 用于父子协程间的数据传递
 context包的核心api有四个: context.WithValue, context.WithCancel, context.WithDeadline, context.WithTimeout
 context实例是不可变的, 每一次都是新创建的
@@ -52,3 +56,129 @@ context.Context使用场景: 上下文传递和超时控制
 context.Context原理
     父亲如何控制儿子: 通过儿子主动加入到父亲的children里, 父亲只需要遍历就可以
     valueCtx和timerCtx的原理
+
+## sync包
+
+Mutex和RWMutex
+Mutex可以看做是锁, RWMutex则是读写锁, 可以多个人加读锁, 使用锁的时候, 优先使用RWMutex
+一般用法是将Mutex或者RWMutex和需要保护主的资源封装在一个结构体内
+    如果有多个goroutine同时读写的资源, 就一定要保护起来
+    如果多个goroutine只读某个资源, 那就不需要保护
+RWMutex: 核心的四个方法 RLock, RUnlock, Lock, UnLock
+Mutex: Lock和UnLock
+并发的读操作也需要加锁
+
+mutex代码案例 - 实现一个线程安全的ArrayList
+思路: 切片本身不是线程安全的, 所以最简单的做法就是利用读写锁封装一下, 这也是典型的装饰器模式的应用
+任何非线程安全的类型, 接口都可以利用 读写锁+装饰器模式 无侵入式地改造为线程安全的类型, 接口
+
+Mutex细节
+锁的一般实现都是依赖于: 自旋作为快路径 等待队列作为慢路径
+自旋可以通过控制次数或者时间来退出循环
+慢路径: 跟语言特性有关, 有些依赖于操作系统线程调度, 如java, 有些是自己管, 如goroutine
+锁实现模板 http://mc.xchch.top:6670/download/halo-blog/2208/锁实现模板.png
+
+Mutex源码 Go/src/sync/mutex.go#Mutex
+state 是用来控制锁状态的核心, 所谓加锁就是把state吸怪为某个值, 解锁也是类似
+sema 是用来处理沉睡, 唤醒的信号量, 依赖于两个runtime调用
+    runtime_SemacquireMutex: sema加1 并且挂起goroutine
+    runtime_Semrelease: sema减1 并且唤醒sema上等待的一个goroutine
+
+go的锁有所谓的两种模式 http://mc.xchch.top:6670/download/halo-blog/2208/锁的两种模式.png
+正常模式: G1和G2竞争, 保证效率, G1已经占着CPU了, 所以大概率能够拿到锁. 正常模式的核心优势是避免goroutine调度
+饥饿模式: 如果队列中队头的G2等待时间超过1ms, 那么锁就会编程饥饿模式, 在饥饿模式下, 锁会有限选择队列中的goroutine
+对应的退出饥饿模式: 要么队列中只剩下一个goroutine, 要么G2的等待时间小于1ms
+
+Mutex细节总结
+先上来一个CAS操作, 如果这把锁正空闲, 并且没人抢, 那么直接成功; 否则自旋几次, 如果这个时候成功了, 也不用加入队列; 否则加入队列
+从队列中唤醒: 正常模式 - 和新来的一起抢锁, 但是大概率失败; 饥饿模式: 肯定拿到锁
+
+解锁: 理论上来书也应该是一个CAS操作, 即必须是加锁状态才能解锁
+
+注意事项
+读写锁适合于读多写少的场景, 写多读少不如直接加写锁
+Mutex和RWMutex都是不可重入的, 一个goroutine拿到读锁后再去加写锁, 会panic
+尽可能使用defer来解锁, 避免panic
+Mutex的公平性: Go的锁不是公平锁, go优先使用的锁模式是正常模式
+如果队列里面有goroutine在等待锁, 那么新来的goroutine是大概率会拿到锁
+
+sync包 - Once
+sync.Once 一般就是用来确保某个动作至多执行一次, 普遍用于初始化资源, 单例模式
+Once的实现是double-check的变种, 没有直接利用读写锁, 而是利用原子曹组来扮演读锁的角色
+go语言的init()函数是用来做包级别的初始化操作, go程序中我们不能显式的调用init, 否则会受收到编译错误
+
+Once的源码案例
+Beego用Once来初始化Web模块
+
+sync包 - Pool
+一般情况下, 要考虑缓存资源, 比如说创建好的对象, 可以使用sync.Pool
+sync.Pool会先查看自己是否有资源, 有则直接返回, 没有则建一个新的, sync.Pool会在GC的时候释放缓存的资源
+一般是用sync.Pool都是为了复用内存, ①它减少了内存分配, 减轻了GC压力(最主要) ②少消耗CPU资源(内存分配和GC都是CPU密集操作)
+
+如何实现一个类似功能的pool
+最简单的方案就是用队列, 并且是并发安全的队列. 队头取, 队尾放回去. 在队列为空的时候创建一个新的
+问题: 队头的队尾都是竞争点, 依赖写锁
+
+? Go的Pool设计
+? Pool的Get步骤
+? Pool的Put步骤
+
+Pool与GC sync/pool.go#Pool
+正常情况下, 我们设计一个Pool都要考虑容量和淘汰问题, 基本类似于缓存. 我们希望能够控制住Pool的内存消耗量, 在这个前提下, 我们要考虑淘汰的问题
+Go的sync.Pool不太一样, 它纯粹依赖于GC, 用户完全没办法手工控制
+sync.Pool的核心机制是依赖于两个: locals 和 victim(缓刑)
+GC的过程 locals会被挪过去编程victim, victim会被直接回收掉
+    复活: 如果victim的对象再次被使用, 那么他就会被丢回去locals, 逃过了下一轮被GC回收掉的命运
+    优点: 防止GC引起性能抖动
+
+利用Pool实现简单的buffer池
+如果一个buffer占据了很多内存, 要不要放回去? 怎么控制整个池的内存使用量, 因为依托于GC是比较不可控的
+    控制单个buffer上限? 控制buffer数量? 控制总体内存
+
+Pool源码案例
+ekit库里有pool中缓存泛型对象的代码案例 https://github.com/gotomicro/ekit/blob/dev/pool/pool.go
+bytebufferpool https://github.com/valyala/bytebufferpool
+
+sync - WaitGroup
+WaitGroup是用于同步多个goroutine之间工作的
+常见场景时我们会把任务拆分给多个goroutine并行完成, 在完成之后需要合并这些任务的结果, 或者需要等到所有小任务都完成之后才能进入下一步
+    要在开启goroutine之前先加1, 每一个小任务完成就减1, 调用Wait方法来等待所有子任务完成
+    容易犯错的地方就是 +1 和 -1 不匹配, 加多了导致Wait一直阻塞, 引起goroutine泄露, 减多了直接就panic
+
+WaitGroup细节 sync/waitgroup.go#WaitGroup
+①需要记住当前有多少个任务还没有完成 ②记住当前有多少goroutine调用了wait方法 ③需要一个东西来协调goroutine的行为
+总结: 我们需要设计三个字段来承载这个功能, 然后搞个锁来维护这三个字段
+    nocopy: may be embedded into structs which must not be copied after the first use. 主要用于告诉编译器说这个东西不能复制
+    state1: 在64位下, 高32位记录了还有多少任务在运行, 低32位记录了有多少goroutine在等Wait()方法返回
+    state2: 信号量, 用于挂起或者唤醒goroutine, 约等于Mutex里的sema字段
+本质上, WaitGroup是一个无锁实现, 严重依赖于CAS对state1的操作
+    Add: 看上去就是state1的高32位自增1, 原子CAS操作
+    Done: 看上去就是state1的高32位自减1, 原子CAS操作, 然后看看是不是要runtime_Semrelease唤醒等待的goroutine, Done相当于Add(-1)
+    Wait: 看上去就是state1的低32位自增1, 同时利用state2和runtime_Semacquire调用把当前goroutine挂起
+
+errorGroup: errorGroup.Group是对waitGroup的封装
+
+## channel编程
+
+彻底理解channel, 要抓住的几个点
+①channel带不带缓冲 ②谁在发 设在收 谁来关 ③关了没
+
+缓冲: channel能放多少个元素
+不带缓冲: 要求收发两端都必须要有goroutine, 否则就是阻塞
+带缓冲: 没满或者没空之前都不会阻塞, 但是满了或者空了就会阻塞
+总结: 对于发送者来说, 只要发出去的数据没有地方放, 就是阻塞; 对于接收者来说, 只要尝试接收数据但是没拿到, 也会阻塞
+
+channel的使用方向
+看做是队列: 主要用于传递数据
+利用阻塞特性: 可以间接控制住goroutine或者其他资源的消耗. 这种用法有点像是令牌机制, 那么往channel里面读或者取一个数据, 就有点像是拿到一个令牌, 拿到令牌才可以做某件事情
+
+channel的代码案例
+发布订阅模式: 利用channel实现发布订阅模式, 发布者不断往channel里面塞入数据, 订阅者从channel里面取出数据. 进程间的事件驱动可以依托与channel来实现
+    见代码 channel_test.go#TestChannel01
+    缺陷: ①没有消费组概念. 同一个事件只能被一个goroutine消费 ② 无法回退. 也无法随机消费
+利用channel实现一个基于内存的消息队列, 并且有消费组的概念
+    方案一: 每一个消费者订阅的时候, 创建一个子channel -- 见代码consumer_group.go, 这种方案更好
+    方案二: 轮询所有的消费者 -- 见代码consumer_group_v2.go
+任务池: 利用channel来实现一个任务池, 允许开发者提交任务, 并且设定最多多少个goroutine同时运行
+    提交任务的时候, 如果执行goroutine满了, 任务池是缓存住这个任务, 还是直接阻塞提交者
+    如果缓存, 那么缓存需要多大> 缓存满了又该怎么办?
