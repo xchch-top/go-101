@@ -15,9 +15,14 @@ func (b *BrokerV2) SubscribeV2(c func(s string)) {
 
 func (b *BrokerV2) Start() {
 	go func() {
-		s := <-b.ch
-		for _, c := range b.consumers {
-			c(s)
+		for {
+			s, ok := <-b.ch
+			if !ok {
+				return
+			}
+			for _, c := range b.consumers {
+				c(s)
+			}
 		}
 	}()
 }
