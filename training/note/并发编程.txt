@@ -78,7 +78,7 @@ Mutex细节
 慢路径: 跟语言特性有关, 有些依赖于操作系统线程调度, 如java, 有些是自己管, 如goroutine
 锁实现模板 http://mc.xchch.top:6670/download/halo-blog/2208/锁实现模板.png
 
-Mutex源码 Go/src/sync/mutex.go#Mutex
+Mutex源码 src/sync/mutex.go#Mutex
 state 是用来控制锁状态的核心, 所谓加锁就是把state吸怪为某个值, 解锁也是类似
 sema 是用来处理沉睡, 唤醒的信号量, 依赖于两个runtime调用
     runtime_SemacquireMutex: sema加1 并且挂起goroutine
@@ -123,7 +123,7 @@ sync.Pool会先查看自己是否有资源, 有则直接返回, 没有则建一�
 ? Pool的Get步骤
 ? Pool的Put步骤
 
-Pool与GC sync/pool.go#Pool
+Pool与GC src/sync/pool.go#Pool
 正常情况下, 我们设计一个Pool都要考虑容量和淘汰问题, 基本类似于缓存. 我们希望能够控制住Pool的内存消耗量, 在这个前提下, 我们要考虑淘汰的问题
 Go的sync.Pool不太一样, 它纯粹依赖于GC, 用户完全没办法手工控制
 sync.Pool的核心机制是依赖于两个: locals 和 victim(缓刑)
@@ -145,7 +145,7 @@ WaitGroup是用于同步多个goroutine之间工作的
     要在开启goroutine之前先加1, 每一个小任务完成就减1, 调用Wait方法来等待所有子任务完成
     容易犯错的地方就是 +1 和 -1 不匹配, 加多了导致Wait一直阻塞, 引起goroutine泄露, 减多了直接就panic
 
-WaitGroup细节 sync/waitgroup.go#WaitGroup
+WaitGroup细节 src/sync/waitgroup.go#WaitGroup
 ①需要记住当前有多少个任务还没有完成 ②记住当前有多少goroutine调用了wait方法 ③需要一个东西来协调goroutine的行为
 总结: 我们需要设计三个字段来承载这个功能, 然后搞个锁来维护这三个字段
     nocopy: may be embedded into structs which must not be copied after the first use. 主要用于告诉编译器说这个东西不能复制
@@ -182,3 +182,31 @@ channel的代码案例
 任务池: 利用channel来实现一个任务池, 允许开发者提交任务, 并且设定最多多少个goroutine同时运行
     提交任务的时候, 如果执行goroutine满了, 任务池是缓存住这个任务, 还是直接阻塞提交者
     如果缓存, 那么缓存需要多大> 缓存满了又该怎么办?
+
+channel与goroutine泄露
+如果channel使用不当, 会导致goroutine泄露, channel使用不正确的情况
+    ① 只发送不接收, 那么发送者一直阻塞, 会导致发送者goroutine泄露
+    ② 只接收不发送, 那么接受者一直阻塞, 会导致接受者goroutine泄露
+    ③ 读写nil丢回导致goroutine泄露
+基本上可以说, goroutine泄露都是因为goroutine被阻塞之后没有人唤醒它导致的
+
+channel与内存逃逸
+内存分配: 分配到栈上, 不需要考虑GC, 分配到堆上, 需要考虑GC
+如果使用channel发送指针, 那么必然逃逸, 编译器无法确定, 发送的指针数据最终会被哪个goroutine接收
+
+channel实现细节
+要设计缓冲来存储数据, 无缓冲=缓冲容量为0
+要能阻塞goroutine, 也要能唤醒goroutine, 这个基本依赖于go的运行时
+    发数据时唤醒收数据的, 收数据时唤醒发数据的
+要维持主goroutine的等待队列, 并且是收和发两个队列
+
+channel结构源码 src/runtime/chan.go#hchan
+    buf是一个ring buffer结构, 用于存储数据
+    waitq是一个双向链表, 简单来说就是队列
+发送的时候, 如果缓冲没满, 或者有接收者, 那就直接发; 否则丢进sendq
+接收的时候, 如果缓冲有数据, 或者说有发送者, 那就接收, 否则丢进recvq
+
+面试要点
+从nil channel读写数据会怎样? 从已关闭的channel读写数据会怎么样?
+goroutine泄露有什么原因
+为什么channel发送指针数据会引起内存泄露
