@@ -54,3 +54,20 @@ OpenDB方法
 Row和Rows
 Row可以理解为只有一行的Rows, 而且是必须要有一行. 没有的话, 在调用Row的Scan的时候会返回sql.ErrNoRows
 不要使用RawBytes, RawBytes存在并发安全问题
+
+driver.Valuer和sql.Scanner接口
+使用场景: SQL默认支持的类型就是基础类型, []byte和string, 该如何自定义类型? 比如我要支持json类型, 我改如何处理?
+driver.Valuer: 读取, 实现该接口的类型可以作为查询参数使用 (go类型到数据库类型)
+sql.Scanner: 写入, 实现该接口的类型可以作为接收器用于Scan方法 (数据库类型到go类型)
+
+事务隔离级别 - mysql
+未读提交 READ UNCOMMITTED
+已读提交 READ COMMITTED
+可重复读 REPEATABLE READ -- mysql默认的级别
+序列化 SERIALIZABLE
+
+MySQl读异常
+脏读: A事务能看到B事务未提交的修改 -- 隔离级别: 未提交读
+不可重复读: A事务内同一个SQL读到了不同的数据 -- 隔离级别: 未提交读和已提交读
+幻读: A事务内读到了B事务新插入的数据
+    -- 隔离级别: 未提交读, 已提交读和可重复读. 注意InnoDB引擎的可重复读并不会引起幻读

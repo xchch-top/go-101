@@ -3,6 +3,8 @@ package sql
 import (
 	"context"
 	"database/sql"
+	"database/sql/driver"
+	"encoding/json"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
@@ -127,4 +129,47 @@ type TestModel struct {
 	FirstName string
 	Age       int8
 	LastName  *sql.NullString
+}
+
+func (s *sqlTestSuite) TestJsonColumn() {
+	t := s.T()
+	db, err := sql.Open("sqlite3", "file:test.db?cache=shared&mode=memory")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// 或者Exec(xxx)
+	res, err := db.ExecContext(context.Background(),
+		"insert into `test_model`(`id`, `first_name`, `age`, `last_name` ) "+
+			"values(?, ?, ?, ?)", 1, FullName{FirstName: "A", LastName: "B"}, 18, "Jerry")
+	if err != nil {
+		t.Fatal(err)
+	}
+	affected, err := res.RowsAffected()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if affected != 1 {
+		t.Fatal(err)
+	}
+
+	row := db.QueryRowContext(context.Background(), "SELECT `id`, `first_name`,`age`, `last_name` FROM `test_model` LIMIT 1")
+	if row.Err() != nil {
+		t.Fatal(row.Err())
+	}
+	tm := &TestModel{}
+
+	err = row.Scan(&tm.Id, &tm.FirstName, &tm.Age, &tm.LastName)
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+type FullName struct {
+	FirstName string
+	LastName  string
+}
+
+func (f FullName) Value() (driver.Value, error) {
+	return json.Marshal(f)
 }
