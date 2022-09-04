@@ -7,7 +7,7 @@ import (
 	"runtime/pprof"
 )
 
-var cpuprofile = flag.String("cpuprofile", "/tmp/cpuprofile", "write cpu profile to file")
+var cpuprofile = flag.String("cpuprofile", "/v1/cpuprofile", "write cpu profile to file")
 
 func main() {
 	flag.Parse()

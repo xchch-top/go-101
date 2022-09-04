@@ -15,11 +15,11 @@ func main() {
 	mySlice4 := make([]int, 10, 20)
 
 	// mySlice1 &[]
-	fmt.Printf("mySlice1 %+v\n", mySlice1)
+	fmt.Printf("mySlice1 %+v2\n", mySlice1)
 	// mySlice2 []
-	fmt.Printf("mySlice2 %+v\n", mySlice2)
+	fmt.Printf("mySlice2 %+v2\n", mySlice2)
 	// mySlice3 [0 0 0 0 0 0 0 0 0 0]
-	fmt.Printf("mySlice3 %+v\n", mySlice3)
+	fmt.Printf("mySlice3 %+v2\n", mySlice3)
 	// mySlice4 [0 0 0 0 0 0 0 0 0 0]
-	fmt.Printf("mySlice4 %+v\n", mySlice4)
+	fmt.Printf("mySlice4 %+v2\n", mySlice4)
 }

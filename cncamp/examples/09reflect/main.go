@@ -22,11 +22,11 @@ func main() {
 	v1 := reflect.ValueOf(myStruct)
 	for i := 0; i < v1.NumField(); i++ {
 		// Field 0: a
-		fmt.Printf("Field %d: %v\n", i, v1.Field(i))
+		fmt.Printf("Field %d: %v2\n", i, v1.Field(i))
 	}
 	for i := 0; i < v1.NumMethod(); i++ {
 		// Method 0: 0xd28fe0
-		fmt.Printf("Method %d: %v\n", i, v1.Method(i))
+		fmt.Printf("Method %d: %v2\n", i, v1.Method(i))
 	}
 
 	// 下面没有实践
