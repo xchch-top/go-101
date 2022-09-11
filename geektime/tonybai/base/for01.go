@@ -32,7 +32,7 @@ func test02() {
 		"alice": 0,
 	}
 	for k, v := range m {
-		fmt.Printf("k = %s, v2 = %d \n", k, v)
+		fmt.Printf("k = %s, v = %d \n", k, v)
 	}
 }
 

@@ -33,7 +33,7 @@ func (t *printVisitor) Visit(node ast.Node) (w ast.Visitor) {
 		typ = typ.Elem()
 		val = val.Elem()
 	}
-	fmt.Printf("val: %+v2, type: %s \n", val.Interface(), typ.Name())
+	fmt.Printf("val: %+v, type: %s \n", val.Interface(), typ.Name())
 	return t
 }
 `, parser.ParseComments)

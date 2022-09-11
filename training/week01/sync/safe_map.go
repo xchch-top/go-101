@@ -10,7 +10,7 @@ import (
 // 没有, 就放进去, 返回loaded = true
 func (s *SafeMap[K, V]) LoadOrStoreGood(key K, newValue V) (V, bool) {
 	s.lock.RLock()
-	fmt.Printf("want set %v2 %v2\n", key, newValue)
+	fmt.Printf("want set %v %v\n", key, newValue)
 	oldVal, ok := s.values[key]
 	// 需要手动释放锁
 	s.lock.RUnlock()
@@ -27,7 +27,7 @@ func (s *SafeMap[K, V]) LoadOrStoreGood(key K, newValue V) (V, bool) {
 		return oldVal, true
 	}
 	s.values[key] = newValue
-	fmt.Printf("after set %v2 %v2\n", key, newValue)
+	fmt.Printf("after set %v %v\n", key, newValue)
 	return newValue, false
 }
 
@@ -48,14 +48,14 @@ func (s *SafeMap[K, V]) LoadOrStoreDefer(key K, newValue V) (V, bool) {
 	s.lock.Lock()
 	defer s.lock.Unlock()
 	s.values[key] = newValue
-	fmt.Printf("after set %v2 %v2\n", key, newValue)
+	fmt.Printf("after set %v %v\n", key, newValue)
 	return newValue, false
 }
 
 // LoadOrStoreBad 有并发写导致的写覆盖问题
 func (s *SafeMap[K, V]) LoadOrStoreBad(key K, newValue V) (V, bool) {
 	s.lock.RLock()
-	fmt.Printf("want set %v2 %v2\n", key, newValue)
+	fmt.Printf("want set %v %v\n", key, newValue)
 	oldVal, ok := s.values[key]
 	// 需要手动释放锁
 	s.lock.RUnlock()
@@ -67,6 +67,6 @@ func (s *SafeMap[K, V]) LoadOrStoreBad(key K, newValue V) (V, bool) {
 	defer s.lock.Unlock()
 	time.Sleep(150 * time.Millisecond)
 	s.values[key] = newValue
-	fmt.Printf("after set %v2 %v2\n", key, newValue)
+	fmt.Printf("after set %v %v\n", key, newValue)
 	return newValue, false
 }
