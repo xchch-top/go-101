@@ -2,15 +2,13 @@ package v1
 
 import (
 	"fmt"
-	"gitlab.xchch.top/zhangsai/go-101/training/week05/web_v7/v1/middleware/accesslog"
-	"gitlab.xchch.top/zhangsai/go-101/training/week05/web_v7/v1/middleware/repeat_body"
 	"net/http"
 	"testing"
 )
 
 func TestServer(t *testing.T) {
 	s := NewHttpServer()
-	s.Use(repeat_body.Middleware(), accesslog.MiddlewareBuilder{}.Build())
+	// s.Use(repeat_body.Middleware(), accesslog.MiddlewareBuilder{}.Build())
 	s.Get("/", func(ctx *Context) {
 		ctx.Resp.Write([]byte("hello world!"))
 	})

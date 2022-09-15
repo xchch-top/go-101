@@ -1,4 +1,4 @@
-package v0
+package v1
 
 import (
 	"fmt"
@@ -37,10 +37,7 @@ func TestServer(t *testing.T) {
 		ctx.RespJSON(http.StatusOK, u)
 	})
 
-	s.Post("/upload", func(ctx *Context) {
-		//
-
-	})
+	s.Post("/upload", (&FileUploader{}).Handle)
 
 	s.Start(":8081")
 }
