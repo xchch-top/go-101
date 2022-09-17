@@ -1,4 +1,4 @@
-package v1
+package v0
 
 import (
 	"fmt"
@@ -45,6 +45,16 @@ func TestServer(t *testing.T) {
 			return path.Join("testdata", "upload", fh.Filename)
 		},
 	}).Handle())
+
+	// http://localhost:8081/download?myfile=鞠婧祎_壁纸.jpg
+	s.Get("/download", (&FileDownloader{
+		Param: "myfile",
+		Dir:   "testdata/upload",
+	}).Handle())
+
+	// http://localhost:8081/static/鞠婧祎_壁纸.jpg
+	staticHandler := NewStaticResourceHandler(WithMaxFileSize(1*1024*1024), WithStaticResourceDir("testdata/upload"))
+	s.Get("/static/:file", staticHandler.Handle)
 
 	s.Start(":8081")
 }

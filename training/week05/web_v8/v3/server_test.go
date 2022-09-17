@@ -1,4 +1,4 @@
-package v1
+package v3
 
 import (
 	"fmt"
@@ -44,6 +44,11 @@ func TestServer(t *testing.T) {
 		DstPathFunc: func(fh *multipart.FileHeader) string {
 			return path.Join("testdata", "upload", fh.Filename)
 		},
+	}).Handle())
+
+	s.Get("/download", (&FileDownloader{
+		Param: "myfile",
+		Dir:   "testdata/upload",
 	}).Handle())
 
 	s.Start(":8081")

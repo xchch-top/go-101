@@ -102,6 +102,10 @@ Middleware要不要考虑顺序问题: http://mc.xchch.top:6670/download/halo-bl
 
 ## 页面渲染&文件处理&session
 
+上传下载这种功能, 可以考虑使用OSS, 不要真的自建服务器, OSS比我们手写代码稳定, 安全
+静态资源和下载不一样, 静态资源下载需要告诉浏览器具体的content-type, 不然浏览器不知道怎么处理文件
+当下不建议使用静态资源服务器, 可以考虑使用 OSS+CDN
+
 代码实现 web_v7 页面渲染
 v0: 上一版本的最终代码
 v1: 实现页面渲染
@@ -109,3 +113,16 @@ v1: 实现页面渲染
 代码实现 web_v8 文件上传
 v0: 上一版本的最终代码
 v1: 实现文件上传
+v2: 调试accesslog中间件
+v3: 实现文件下载
+v4: 静态资源处理
+
+header含义
+Content-Disposition: 在指定为attachment的时候, 就是保存到本地, 同时我们还设置了filename
+Content-Type: 这里用的是octet-stream, 代表的就是通用的二进制文件, 如果我们知道确切类型, 就可以换别的, 例如video, PDE之类的
+Content-Transfer-Encoding: 这里设置为binary, 相当于直接传输
+
+安全问题
+http://localhost:8081/download?myfile=../../../../note/Web%E6%A1%86%E6%9E%B6.txt 可以下载到规定目录外的文件(Web框架.txt)
+
+session 和 flash
