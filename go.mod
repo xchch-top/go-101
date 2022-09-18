@@ -6,8 +6,12 @@ require (
 	github.com/beego/beego/v2 v2.0.5
 	github.com/gin-contrib/sessions v0.0.5
 	github.com/gin-gonic/gin v1.8.1
+	github.com/google/uuid v1.2.0
+	github.com/hashicorp/golang-lru v0.5.4
 	github.com/kataras/iris/v12 v12.1.8
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible
+	github.com/patrickmn/go-cache v2.1.0+incompatible
+	github.com/prometheus/client_golang v1.12.1
 	github.com/stretchr/testify v1.8.0
 	go.opentelemetry.io/otel v1.9.0
 	go.opentelemetry.io/otel/exporters/jaeger v1.9.0
@@ -41,7 +45,6 @@ require (
 	github.com/gorilla/context v1.1.1 // indirect
 	github.com/gorilla/securecookie v1.1.1 // indirect
 	github.com/gorilla/sessions v1.2.1 // indirect
-	github.com/hashicorp/golang-lru v0.5.4 // indirect
 	github.com/imkira/go-interpol v1.1.0 // indirect
 	github.com/iris-contrib/blackfriday v2.0.0+incompatible // indirect
 	github.com/iris-contrib/jade v1.1.3 // indirect
@@ -64,7 +67,6 @@ require (
 	github.com/pelletier/go-toml/v2 v2.0.1 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/prometheus/client_golang v1.12.1 // indirect
 	github.com/prometheus/client_model v0.2.0 // indirect
 	github.com/prometheus/common v0.32.1 // indirect
 	github.com/prometheus/procfs v0.7.3 // indirect

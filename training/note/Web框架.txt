@@ -125,4 +125,20 @@ Content-Transfer-Encoding: 这里设置为binary, 相当于直接传输
 安全问题
 http://localhost:8081/download?myfile=../../../../note/Web%E6%A1%86%E6%9E%B6.txt 可以下载到规定目录外的文件(Web框架.txt)
 
-session 和 flash
+? session 和 flash
+
+代码实现 web_v8 文件上传
+v0: 上一版本的最终代码
+v1: session逻辑实现
+
+Session总结
+同时设置http_only和secure选项, 限制Cookie只能在https里面被访问
+sessionId编码的时候带上一些客户端信息, 比如agent信息, mac地址之类的, 如果服务端检测到sessionId所携带的这些信息发生了变化, 就要求用户重新登录
+sessionId让用户决定如何生成, sessionId中可以携带编码后的用户信息, 减少对redis的访问
+什么时候刷新session: ①不刷新 ②每次请求都刷新 ③前端定时心跳刷新 ④长短两个token
+
+面试题
+session是什么: 一种在服务端维护用户状态的机制
+为什么要把数据编码进sessionId? 为了减轻存储session的压力, 比如说redis. 直接解码拿到数据之后就不需要访问redis了
+sessionId放到cookie有什么缺点? 一般来说我们会要求Cookie设置http_only, 以及设置SameSite策略. 最好是启用https协议, 并且设置Cookie和Secure选项.
+    坦白说这是吹毛求疵, 毕竟你放header或者查询参数连这些选项都没有
