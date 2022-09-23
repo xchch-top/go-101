@@ -1,0 +1,15 @@
+# ORM框架
+
+## ORM框架概览
+
+ORM: 对象-关系 映射
+ORM框架是帮助用户完成对象到SQL, 以及结果集到对象的映射的工具
+ORM框架的主要职责: 对象 -> SQL, 结果集 -> 对象
+
+## select起步
+
+mysql select语句规范 https://dev.mysql.com/doc/refman/8.0/en/select.html
+
+代码实现 orm_v1
+v0: query接口定义, from部分实现
+v1: where部分实现
