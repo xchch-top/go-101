@@ -3,6 +3,7 @@ module gitlab.xchch.top/zhangsai/go-101
 go 1.18
 
 require (
+	github.com/DATA-DOG/go-sqlmock v1.5.0
 	github.com/beego/beego/v2 v2.0.5
 	github.com/gin-contrib/sessions v0.0.5
 	github.com/gin-gonic/gin v1.8.1
