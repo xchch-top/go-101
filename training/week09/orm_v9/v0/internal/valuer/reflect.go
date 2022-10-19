@@ -2,31 +2,21 @@ package valuer
 
 import (
 	"database/sql"
-	"gitlab.xchch.top/zhangsai/go-101/training/week08/orm_v6/v4/internal/errs"
-	orm "gitlab.xchch.top/zhangsai/go-101/training/week08/orm_v6/v4/model"
+	"gitlab.xchch.top/zhangsai/go-101/training/week09/orm_v9/v0/internal/errs"
+	orm "gitlab.xchch.top/zhangsai/go-101/training/week09/orm_v9/v0/model"
 	"reflect"
 )
 
 type reflectValue struct {
-	val   reflect.Value
+	t     any
 	model *orm.Model
 }
 
 func NewReflectValue(t any, model *orm.Model) Value {
 	return &reflectValue{
-		val:   reflect.ValueOf(t).Elem(),
+		t:     t,
 		model: model,
 	}
-}
-
-func (r *reflectValue) Field(name string) (any, error) {
-	val := r.val
-	typ := val.Type()
-	_, ok := typ.FieldByName(name)
-	if !ok {
-		return nil, errs.NewErrUnknownField(name)
-	}
-	return val.FieldByName(name).Interface(), nil
 }
 
 func (r *reflectValue) SetColumns(rows *sql.Rows) error {
@@ -59,7 +49,8 @@ func (r *reflectValue) SetColumns(rows *sql.Rows) error {
 	}
 
 	// 这一步 vals = [123, "li", 18, "ming"]
-	tVal := r.val
+	t := r.t
+	tVal := reflect.ValueOf(t).Elem()
 	for i, col := range cols {
 		fd := r.model.ColumnMap[col]
 		tVal.FieldByName(fd.GoName).Set(reflect.ValueOf(vals[i]).Elem())

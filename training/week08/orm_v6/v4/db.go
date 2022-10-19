@@ -34,7 +34,7 @@ func OpenDB(db *sql.DB, opts ...DbOption) (*DB, error) {
 			Models: map[reflect.Type]*model.Model{},
 		},
 		db:         db,
-		valCreator: valuer.NewReflectValue,
+		valCreator: valuer.NewUnsafeValue,
 		dialect:    &mysqlDialect{},
 	}
 	for _, opt := range opts {

@@ -7,7 +7,9 @@ require (
 	github.com/beego/beego/v2 v2.0.5
 	github.com/gin-contrib/sessions v0.0.5
 	github.com/gin-gonic/gin v1.8.1
+	github.com/go-sql-driver/mysql v1.6.0
 	github.com/google/uuid v1.2.0
+	github.com/gotomicro/ekit v0.0.4
 	github.com/hashicorp/golang-lru v0.5.4
 	github.com/kataras/iris/v12 v12.1.8
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible
@@ -20,7 +22,7 @@ require (
 	go.opentelemetry.io/otel/sdk v1.9.0
 	go.opentelemetry.io/otel/trace v1.9.0
 	go.uber.org/multierr v1.6.0
-	golang.org/x/sync v0.0.0-20220722155255-886fb9371eb4
+	golang.org/x/sync v0.0.0-20220819030929-7fc1605a5dde
 )
 
 require (
