@@ -2,8 +2,8 @@ package valuer
 
 import (
 	"database/sql"
-	"gitlab.xchch.top/zhangsai/go-101/training/week07/orm_v3/v4/internal/errs"
-	orm "gitlab.xchch.top/zhangsai/go-101/training/week07/orm_v3/v4/model"
+	"gitlab.xchch.top/zhangsai/go-101/training/week10/orm_v10/v0/internal/errs"
+	orm "gitlab.xchch.top/zhangsai/go-101/training/week10/orm_v10/v0/model"
 	"reflect"
 )
 
@@ -33,16 +33,13 @@ func (r *reflectValue) SetColumns(rows *sql.Rows) error {
 	}
 
 	vals := make([]any, 0, len(cols))
-	elemVals := make([]reflect.Value, 0, len(cols))
 	for _, col := range cols {
 		fd, ok := r.model.ColumnMap[col]
 		if !ok {
 			return errs.NewErrUnknownColumn(col)
 		}
 		// fd.Typ 是 int, ==> reflect.New(fd.typ) 是 *int
-		fdVal := reflect.New(fd.Typ)
-		vals = append(vals, fdVal.Interface())
-		elemVals = append(elemVals, fdVal.Elem())
+		vals = append(vals, reflect.New(fd.Typ).Interface())
 	}
 
 	// 要把cols映射到字段
@@ -56,7 +53,7 @@ func (r *reflectValue) SetColumns(rows *sql.Rows) error {
 	tVal := reflect.ValueOf(t).Elem()
 	for i, col := range cols {
 		fd := r.model.ColumnMap[col]
-		tVal.FieldByName(fd.GoName).Set(elemVals[i])
+		tVal.FieldByName(fd.GoName).Set(reflect.ValueOf(vals[i]).Elem())
 	}
 
 	return nil

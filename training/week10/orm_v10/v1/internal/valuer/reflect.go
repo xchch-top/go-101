@@ -2,8 +2,8 @@ package valuer
 
 import (
 	"database/sql"
-	"gitlab.xchch.top/zhangsai/go-101/training/week07/orm_v3/v4/internal/errs"
-	orm "gitlab.xchch.top/zhangsai/go-101/training/week07/orm_v3/v4/model"
+	"gitlab.xchch.top/zhangsai/go-101/training/week10/orm_v10/v1/internal/errs"
+	orm "gitlab.xchch.top/zhangsai/go-101/training/week10/orm_v10/v1/model"
 	"reflect"
 )
 

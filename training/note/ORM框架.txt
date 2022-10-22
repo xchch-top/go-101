@@ -143,9 +143,15 @@ GORM的Hook设计原理: gorm的hook按照sql类型分类, 例如BeforeCreate之
 
 ## 集成测试
 
-代码实现 orm_v8
+代码实现 orm_v9
 v0: 上一版本的最终代码
 v1: mysql的insert方法集成测试通过
 v2: 使用testSuite测试套件, 提供不同的测试上下文
 
 TestContainer
+
+## 原生查询
+
+代码实现 orm_v10
+v0: 上一版本的最终代码
+v1: 对原有select的get方法重构
