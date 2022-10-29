@@ -28,3 +28,22 @@ Redis的过期处理, 也是用的类似的策略: get的时候检查是否过�
 控制本地缓存内存的两种策略
 控制键值对数量 比如说只能允许十万个键值对
 控制整体内存 需要计算每个对象的大小, 然后累加
+
+## redis cache
+
+mockgen使用
+cd training\week11\redis_cache\v1
+go install github.com/golang/mock/mockgen@1.6.0
+mockgen -package mocks -destination mocks/redis_cmdable.mock.go -source C:\Users\{name}\go\pkg\mod\github.com\go-redis\redis\v9@v9.0.0-rc.1/command.go
+
+代码实现 redis_cache
+v0: local_cache的最终代码
+v1: 使用mockgen+test测试redis接口的调用
+
+面试要点
+缓存过期时间怎么控制? 定期删除+懒惰删除
+定期删除过期缓存有什么要注意的? 注意控制CPU的开销, 防止定期删除占用太多的资源
+为什么无法做到缓存一过期就删除? 借助于延迟队列可以勉强做到, 例如在毫秒级的时间啊in误差内做到. 但是更加精确的时间误差就做不到了,
+    如果没有延迟队列, 那么就只能考虑开goroutine盯着缓存键值对, 资源开销太大
+本地缓存如何避免占用内存太多? 要控制内存使用量, 可以通过控制内存总量, 也可以控制键值对总数
+如何提高缓存的内存利用率? 一个是不要使用Hash一类的数据结构, 另一个是不要直接存储对象, 而是存储序列化后的数据. 这个也可以看做是缓存节约内存的一部分措施
