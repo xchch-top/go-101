@@ -3,11 +3,14 @@ package v3
 import (
 	"context"
 	"errors"
+	"gitlab.xchch.top/zhangsai/go-101/training/week11/local_cache/v3/internal/errs"
+	"sync"
 	"sync/atomic"
 	"time"
 )
 
 type MaxCntCacheDecorator struct {
+	mutex  sync.Mutex
 	maxCnt int32
 	cnt    int32
 
@@ -24,11 +27,16 @@ func NewMaxCntCache(maxCnt int32) *MaxCntCacheDecorator {
 }
 
 func (c *MaxCntCacheDecorator) Set(ctx context.Context, key string, val any, expiration time.Duration) error {
-	// 判断有没有超过最大值
-	cnt := atomic.AddInt32(&c.cnt, 1)
-	if cnt > c.maxCnt {
-		atomic.AddInt32(&c.cnt, -1)
-		return errors.New("cache: 已经满了")
+	c.mutex.Lock()
+	defer c.mutex.Unlock()
+	_, err := c.cache.Get(ctx, key)
+	if err == errs.NewErrKeyNotFound(key) {
+		cnt := atomic.AddInt32(&c.cnt, 1)
+		// 判断有没有超过最大值
+		if cnt > c.maxCnt {
+			atomic.AddInt32(&c.cnt, -1)
+			return errors.New("cache: 已经满了")
+		}
 	}
 	return c.cache.Set(ctx, key, val, expiration)
 }
