@@ -39,6 +39,7 @@ mockgen -package mocks -destination mocks/redis_cmdable.mock.go -source C:\Users
 代码实现 redis_cache
 v0: local_cache的最终代码
 v1: 使用mockgen+test测试redis接口的调用
+v2: 布隆过滤器代码
 
 面试要点
 缓存过期时间怎么控制? 定期删除+懒惰删除
@@ -67,7 +68,7 @@ refresh-ahead
     refresh-ahead依赖于cdc(changed data capture)接口
     概念: 数据库暴露数据变更接口, cache或者第四方在监听到数据变更之后自动更新数据, 如果读cache未命中, 依旧要刷新缓存的话, 依然会出现并发问题
 
-缓存异常
+缓存异常 - ppt中的解决方案很精彩
 缓存穿透
     概念: 读请求对应的数据根本不存在, 因此每次都会发起数据库查询, 数据库返回null, 所以下一次请求依旧会打到数据库
     关键点就是这个数据根本没有, 所以不会回写缓存. 一般是黑客使用了一些非法的请求, 比如说非法的邮箱, ID等
@@ -77,3 +78,15 @@ refresh-ahead
 缓存雪崩
     概念: 同一时刻, 大量key过期, 查询都要回查数据库
     常见场景是在启动的时候加载缓存, 因为所有key的过期时间都一样, 所以会在同一时间全部过期
+
+Single Flight
+缓存异常的所有问题, 问题的落脚点都是大量请求落到了数据库上, 所以思路就是, 怎么在缓存出现问题的时候, 依旧让这些请求不会落到数据库.
+single flight设计模式能够有效减轻对数据库的压力. 在有多个goroutine试图去数据库加载同一个key对应的数据时, 只允许一个goroutine过去查询, 其它都在原地等结果
+热点越集中的应用, 效果越好
+
+代码实现 cache_pattern
+v0: redis_cache的最终代码
+v1: read_through的版本1代码实现
+v2: 使用泛型设计read_through代码
+v3: v0代码上增加write_through实现
+v4: v0代码上增加write_back实现
