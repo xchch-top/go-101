@@ -38,6 +38,13 @@ type Context struct {
 	UserValues map[string]any
 }
 
+// RespString 返回字符串作为响应
+func (c *Context) RespString(code int, msg string) error {
+	c.RespData = []byte(msg)
+	c.RespStatusCode = code
+	return nil
+}
+
 func (c *Context) BindJSON(val any) error {
 	if c.Req.Body == nil {
 		return errors.New("web: body 为 nil")
@@ -89,6 +96,12 @@ func (c *Context) RespJSON(code int, val any) error {
 	c.RespStatusCode = code
 	c.RespData = bs
 	return err
+}
+
+func (c *Context) RespOk(msg string) error {
+	c.RespStatusCode = http.StatusOK
+	c.RespData = []byte(msg)
+	return nil
 }
 
 func (c *Context) Render(tpl string, data any) error {
