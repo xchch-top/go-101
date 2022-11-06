@@ -52,19 +52,17 @@ func TestManager(t *testing.T) {
 		_ = m.RemoveSession(ctx)
 	})
 
-	s.Use(func(next web.HandleFunc) web.HandleFunc {
+	s.Use("POST", "/login", func(next web.HandleFunc) web.HandleFunc {
 		return func(ctx *web.Context) {
 			// 执行校验
-			if ctx.Req.URL.Path != "/login" {
-				sess, err := m.GetSession(ctx)
-				// 不管发生了什么错误，对于用户我们都是返回未授权
-				if err != nil {
-					ctx.RespStatusCode = http.StatusUnauthorized
-					return
-				}
-				ctx.UserValues["sess"] = sess
-				_ = m.Refresh(ctx.Req.Context(), sess.ID())
+			sess, err := m.GetSession(ctx)
+			// 不管发生了什么错误，对于用户我们都是返回未授权
+			if err != nil {
+				ctx.RespStatusCode = http.StatusUnauthorized
+				return
 			}
+			ctx.UserValues["sess"] = sess
+			_ = m.Refresh(ctx.Req.Context(), sess.ID())
 			next(ctx)
 		}
 	})

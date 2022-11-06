@@ -118,7 +118,6 @@ type StaticResourceHandlerOption func(h *StaticResourceHandler)
 
 type StaticResourceHandler struct {
 	dir                     string
-	pathPrefix              string
 	extensionContentTypeMap map[string]string
 
 	// 缓存静态资源的限制
@@ -136,8 +135,7 @@ type fileCacheItem struct {
 func NewStaticResourceHandler(dir string, pathPrefix string,
 	options ...StaticResourceHandlerOption) *StaticResourceHandler {
 	res := &StaticResourceHandler{
-		dir:        dir,
-		pathPrefix: pathPrefix,
+		dir: dir,
 		extensionContentTypeMap: map[string]string{
 			// 这里根据自己的需要不断添加
 			"jpeg": "image/jpeg",

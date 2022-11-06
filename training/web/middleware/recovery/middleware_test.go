@@ -2,7 +2,6 @@ package recovery
 
 import (
 	"gitlab.xchch.top/zhangsai/go-101/training/web"
-	"log"
 	"testing"
 )
 
@@ -16,13 +15,13 @@ func TestMiddlewareBuilder_Build(t *testing.T) {
 		panic("闲着没事 panic")
 	})
 
-	s.Use((&MiddlewareBuilder{
-		StatusCode: 500,
-		ErrMsg:     "你 Panic 了",
-		LogFunc: func(ctx *web.Context) {
-			log.Println(ctx.Req.URL.Path)
-		},
-	}).Build())
+	// s.Use((&MiddlewareBuilder{
+	// 	StatusCode: 500,
+	// 	ErrMsg:     "服务出小差了",
+	// 	LogFunc: func(ctx *web.Context) {
+	// 		log.Println(ctx.Req.URL.Path)
+	// 	},
+	// }).Build())
 
 	s.Start(":8081")
 }

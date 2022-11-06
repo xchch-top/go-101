@@ -12,13 +12,14 @@ type core struct {
 	dialect    Dialect
 	valCreator valuer.Creator
 	ms         []Middleware
+	model      *model.Model
 }
 
 func getHandler[T any](ctx context.Context,
-	sess session,
+	sess Session,
 	c core,
 	qc *QueryContext) *QueryResult {
-	q, err := qc.Builder.Build()
+	q, err := qc.Query()
 	if err != nil {
 		return &QueryResult{
 			Err: err,
@@ -52,7 +53,7 @@ func getHandler[T any](ctx context.Context,
 	}
 }
 
-func get[T any](ctx context.Context, c core, sess session, qc *QueryContext) *QueryResult {
+func get[T any](ctx context.Context, c core, sess Session, qc *QueryContext) *QueryResult {
 	var handler HandleFunc = func(ctx context.Context, qc *QueryContext) *QueryResult {
 		return getHandler[T](ctx, sess, c, qc)
 	}
@@ -63,14 +64,19 @@ func get[T any](ctx context.Context, c core, sess session, qc *QueryContext) *Qu
 	return handler(ctx, qc)
 }
 
-func exec(ctx context.Context, sess session, c core, qc *QueryContext) Result {
+// func getMulti[T any](ctx context.Context, c core, sess Session, qc *QueryContext) *QueryResult {
+//
+// }
+
+func exec(ctx context.Context, sess Session, c core, qc *QueryContext) Result {
 	var handler HandleFunc = func(ctx context.Context, qc *QueryContext) *QueryResult {
-		q, err := qc.Builder.Build()
+		q, err := qc.Query()
 		if err != nil {
 			return &QueryResult{
 				Err: err,
 			}
 		}
+
 		res, err := sess.execContext(ctx, q.SQL, q.Args...)
 		return &QueryResult{Err: err, Result: res}
 	}

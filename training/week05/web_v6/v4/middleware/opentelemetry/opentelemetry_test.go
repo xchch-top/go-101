@@ -18,7 +18,7 @@ import (
 func TestOpenTelemetry(t *testing.T) {
 	ctx := context.Background()
 	tracer := otel.GetTracerProvider().
-		Tracer("gitee.com/geektime-geekbang/geektime-go/extra/opentelemetry")
+		Tracer("gitlab.xchch.top/zhangsai/go-101/extra/opentelemetry")
 
 	// 如果 ctx 已经和一个 span 绑定了，那么新的 span 就是老的 span 的日子
 	ctx, span := tracer.Start(ctx, "opentelemetry-demo",

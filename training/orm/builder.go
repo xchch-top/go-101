@@ -2,17 +2,16 @@ package orm
 
 import (
 	"gitlab.xchch.top/zhangsai/go-101/training/orm/internal/errs"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/model"
 	"strings"
 )
 
 type builder struct {
 	core
-	sb      strings.Builder
+	sb strings.Builder
+	// sb bytebufferpool.ByteBuffer
 	args    []any
 	dialect Dialect
 	quoter  byte
-	model   *model.Model
 }
 
 // buildColumn 构造列

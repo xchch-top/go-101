@@ -24,9 +24,8 @@ func TestServer(t *testing.T) {
 		}
 	})
 
-	s.Get("/login", func(ctx *Context) {
-		tpl := template.New("login")
-		tpl, err := tpl.Parse(`
+	tpl := template.New("login")
+	tpl, err := tpl.Parse(`
 <html>
 	<body>
 		<form>
@@ -35,10 +34,11 @@ func TestServer(t *testing.T) {
 	</body>
 </html>
 `)
-		if err != nil {
-			t.Fatal(err)
-		}
 
+	if err != nil {
+		t.Fatal(err)
+	}
+	s.Get("/login", func(ctx *Context) {
 		page := &bytes.Buffer{}
 		err = tpl.Execute(page, nil)
 		if err != nil {

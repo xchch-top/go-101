@@ -35,10 +35,10 @@ type Inserter[T any] struct {
 	values  []*T
 	columns []string
 	upsert  *Upsert
-	sess    session
+	sess    Session
 }
 
-func NewInserter[T any](sess session) *Inserter[T] {
+func NewInserter[T any](sess Session) *Inserter[T] {
 	c := sess.getCore()
 	return &Inserter[T]{
 		sess: sess,
@@ -61,7 +61,7 @@ func (i *Inserter[T]) OnDuplicateKey() *UpsertBuilder[T] {
 	}
 }
 
-// Fields 指定要插入的列
+// Columns 指定要插入的列
 // TODO 目前我们只支持指定具体的列，但是不支持复杂的表达式
 // 例如不支持 VALUES(..., now(), now()) 这种在 MySQL 里面常用的
 func (i *Inserter[T]) Columns(cols ...string) *Inserter[T] {
@@ -73,20 +73,23 @@ func (i *Inserter[T]) Build() (*Query, error) {
 	if len(i.values) == 0 {
 		return nil, errs.ErrInsertZeroRow
 	}
-	m, err := i.r.Get(i.values[0])
-	i.model = m
-	if err != nil {
-		return nil, err
+	if i.model == nil {
+		m, err := i.r.Get(i.values[0])
+		if err != nil {
+			return nil, err
+		}
+		i.model = m
 	}
+
 	i.sb.WriteString("INSERT INTO ")
-	i.quote(m.TableName)
+	i.quote(i.model.TableName)
 	i.sb.WriteString("(")
 
-	fields := m.Fields
+	fields := i.model.Fields
 	if len(i.columns) != 0 {
 		fields = make([]*model.Field, 0, len(i.columns))
 		for _, c := range i.columns {
-			field, ok := m.FieldMap[c]
+			field, ok := i.model.FieldMap[c]
 			if !ok {
 				return nil, errs.NewErrUnknownField(c)
 			}
@@ -108,7 +111,7 @@ func (i *Inserter[T]) Build() (*Query, error) {
 		if vIdx > 0 {
 			i.sb.WriteByte(',')
 		}
-		refVal := i.valCreator(val, m)
+		refVal := i.valCreator(val, i.model)
 		i.sb.WriteByte('(')
 		for fIdx, field := range fields {
 			if fIdx > 0 {
@@ -125,7 +128,7 @@ func (i *Inserter[T]) Build() (*Query, error) {
 	}
 
 	if i.upsert != nil {
-		err = i.core.dialect.buildUpsert(&i.builder, i.upsert)
+		err := i.core.dialect.buildUpsert(&i.builder, i.upsert)
 		if err != nil {
 			return nil, err
 		}
@@ -139,8 +142,18 @@ func (i *Inserter[T]) Build() (*Query, error) {
 }
 
 func (i *Inserter[T]) Exec(ctx context.Context) Result {
+	if i.model == nil {
+		m, err := i.r.Get(new(T))
+		if err != nil {
+			return Result{
+				err: err,
+			}
+		}
+		i.model = m
+	}
 	return exec(ctx, i.sess, i.core, &QueryContext{
-		Builder: i,
+		builder: i,
 		Type:    "INSERT",
+		Model:   i.model,
 	})
 }

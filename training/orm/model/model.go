@@ -14,6 +14,7 @@ type Model struct {
 
 // Field 字段
 type Field struct {
+	NotNull bool
 	ColName string
 	GoName  string
 	Type    reflect.Type
@@ -35,3 +36,18 @@ const (
 type TableName interface {
 	TableName() string
 }
+
+// type Order struct {
+// 	BuyerId int64
+// 	Region string
+// }
+//
+// func (o Order) DBName() string {
+// 	return fmt.Sprintf("%s_order_db_%04d", o.Region, o.BuyerId % 1000)
+// }
+//
+// func (o Order) TableName() string {
+//
+// 	// 最简单的分表
+// 	return fmt.Sprintf("order_tab_%04d", o.BuyerId % 1000)
+// }

@@ -8,13 +8,13 @@ import (
 	"go.opentelemetry.io/otel/trace"
 )
 
-const defaultInstrumentationName = "gitee.com/geektime-geekbang/geektime-go/web/middle/opentelemetry"
+const defaultInstrumentationName = "gitlab.xchch.top/zhangsai/go-101/training/web/middle/opentelemetry"
 
 type MiddlewareBuilder struct {
 	Tracer trace.Tracer
 }
 
-func (b *MiddlewareBuilder) Build() web.Middleware {
+func (b MiddlewareBuilder) Build() web.Middleware {
 	if b.Tracer == nil {
 		b.Tracer = otel.GetTracerProvider().Tracer(defaultInstrumentationName)
 	}

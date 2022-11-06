@@ -41,11 +41,6 @@ func NewErrUnsupportedExpressionType(exp any) error {
 	return fmt.Errorf("orm: 不支持的表达式 %v", exp)
 }
 
-// NewErrUnsupportedTableType 返回一个不支持该 TableReference 错误信息
-func NewErrUnsupportedTableType(exp any) error {
-	return fmt.Errorf("orm: 不支持的 TableReference %v", exp)
-}
-
 // NewErrUnsupportedSelectable 返回一个不支持该 selectable 的错误信息
 // 即 exp 不能作为 SELECT xxx 的一部分
 func NewErrUnsupportedSelectable(exp any) error {
