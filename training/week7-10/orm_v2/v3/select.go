@@ -134,11 +134,11 @@ func NewSelector[T any](db *DB) *Selector[T] {
 }
 
 func (s *Selector[T]) Get(ctx context.Context) (*T, error) {
-	//TODO implement me
+	// TODO implement me
 	panic("implement me")
 }
 
 func (s *Selector[T]) GetMulti(ctx context.Context) ([]*T, error) {
-	//TODO implement me
+	// TODO implement me
 	panic("implement me")
 }

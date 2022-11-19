@@ -33,7 +33,7 @@ func (i *InsertTestSuite) SetupSuite() {
 func (i *InsertTestSuite) TestInsert() {
 	t := i.T()
 	db := i.db
-	//db.Wait()
+	// db.Wait()
 
 	defer func() {
 		// 删除你的数据

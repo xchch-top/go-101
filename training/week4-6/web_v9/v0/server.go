@@ -96,7 +96,7 @@ func (s *HttpServer) ServeHTTP(writer http.ResponseWriter, request *http.Request
 
 func (s *HttpServer) writeResp(ctx *Context) {
 	// ctx.Resp.Header().Set("Content-Type", "application/json")
-	//ctx.Resp.WriteHeader(ctx.StatusCode)
+	// ctx.Resp.WriteHeader(ctx.StatusCode)
 	ctx.Resp.Write(ctx.RespData)
 }
 

@@ -3,7 +3,7 @@ package v0
 import "context"
 
 type QueryContext struct {
-	//用在UPDATE, DELETE, SELECT, 以及INSERT语句上
+	// 用在UPDATE, DELETE, SELECT, 以及INSERT语句上
 	Type string
 
 	Builder QueryBuilder

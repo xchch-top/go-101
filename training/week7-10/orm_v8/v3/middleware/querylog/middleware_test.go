@@ -13,15 +13,15 @@ import (
 
 func TestMiddlewareBuilder_Build(t *testing.T) {
 	builder := &MiddlewareBuilder{}
-	db, err := v2.Open("sqlite3", "file:test.db?cache=shared&mode=memory",
-		v2.DbWithMiddleware(builder.UserLogFunc(func(sql string, args ...any) {
+	db, err := v3.Open("sqlite3", "file:test.db?cache=shared&mode=memory",
+		v3.DbWithMiddleware(builder.UserLogFunc(func(sql string, args ...any) {
 			fmt.Println(sql)
 		}).Build()))
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	_, err = v2.NewSelector[TestModel](db).Get(context.Background())
+	_, err = v3.NewSelector[TestModel](db).Get(context.Background())
 	assert.NotNil(t, err)
 }
 
@@ -30,9 +30,9 @@ func TestMiddlewareBuilder_SlowQueryBuild(t *testing.T) {
 	builder.UserLogFunc(func(sql string, args ...any) {
 		fmt.Println(sql)
 	}).SlowQueryThreshold(100) // 100ms
-	db, err := v2.Open("sqlite3", "file:test.db?cache=shared&mode=memory",
-		v2.DbWithMiddleware(builder.SlowQueryBuild(), func(next v2.Handler) v2.Handler {
-			return func(ctx context.Context, qc *v2.QueryContext) *v2.QueryResult {
+	db, err := v3.Open("sqlite3", "file:test.db?cache=shared&mode=memory",
+		v3.DbWithMiddleware(builder.SlowQueryBuild(), func(next v3.Handler) v3.Handler {
+			return func(ctx context.Context, qc *v3.QueryContext) *v3.QueryResult {
 				time.Sleep(time.Millisecond * 1000)
 				return next(ctx, qc)
 			}
@@ -41,7 +41,7 @@ func TestMiddlewareBuilder_SlowQueryBuild(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	_, err = v2.NewSelector[TestModel](db).Get(context.Background())
+	_, err = v3.NewSelector[TestModel](db).Get(context.Background())
 	assert.NotNil(t, err)
 }
 

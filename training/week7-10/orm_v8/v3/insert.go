@@ -1,4 +1,4 @@
-package v2
+package v3
 
 import (
 	"context"
@@ -120,14 +120,14 @@ func NewInserter[T any](sess Session) *Inserter[T] {
 
 type UpsertBuilder[T any] struct {
 	i *Inserter[T]
-	//where           []Predicate
+	// where           []Predicate
 	conflictColumns []string
 }
 
 type Upsert struct {
 	assigns         []Assignable
 	conflictColumns []string
-	//doNothing bool
+	// doNothing bool
 }
 
 func (i *Inserter[T]) Upsert() *UpsertBuilder[T] {
@@ -151,15 +151,15 @@ func (o *UpsertBuilder[T]) Update(assigns ...Assignable) *Inserter[T] {
 }
 
 // 很少使用
-//func (o *UpsertBuilder[T]) Where(ps ...Predicate) *UpsertBuilder[T] {
+// func (o *UpsertBuilder[T]) Where(ps ...Predicate) *UpsertBuilder[T] {
 //	o.where = ps
 //	return o
-//}
+// }
 //
 // 很少使用
-//func (o *UpsertBuilder[T]) DoNothing(assigns ...Assignable) *Inserter[T] {
+// func (o *UpsertBuilder[T]) DoNothing(assigns ...Assignable) *Inserter[T] {
 //	o.i.onDuplicate = &Upsert{
 //		doNothing: true,
 //	}
 //	return o.i
-//}
+// }

@@ -42,8 +42,8 @@ func (t *Tx) execContext(ctx context.Context, query string, args ...any) (sql.Re
 
 type Session interface {
 	getCore() core
-	//getModel(val any) (*model.Model, error)
-	//valCreator() (valuer.Value, error)
+	// getModel(val any) (*model.Model, error)
+	// valCreator() (valuer.Value, error)
 	queryContext(ctx context.Context, query string, args ...any) (*sql.Rows, error)
 	execContext(ctx context.Context, query string, args ...any) (sql.Result, error)
 }

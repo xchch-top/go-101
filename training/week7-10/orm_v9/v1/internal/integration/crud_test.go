@@ -41,11 +41,11 @@ func TestMySqL_Insert(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			// LastInsertId可以简写为这种取值方式
-			//id, err := tc.i.Exec(context.Background()).LastInsertId()
-			//assert.Equal(t, tc.wantErr, err)
-			//if err != nil {
+			// id, err := tc.i.Exec(context.Background()).LastInsertId()
+			// assert.Equal(t, tc.wantErr, err)
+			// if err != nil {
 			//	return
-			//}
+			// }
 
 			res := tc.i.Exec(context.Background())
 			affected, err := res.RowsAffected()

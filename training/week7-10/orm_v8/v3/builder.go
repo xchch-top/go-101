@@ -1,4 +1,4 @@
-package v2
+package v3
 
 import (
 	"gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v8/v3/model"

@@ -1,32 +1,32 @@
 package v0
 
 //
-//import (
+// import (
 //	"context"
 //	"database/sql"
-//)
+// )
 //
-//// AopDB sql.DB 上加 AOP 解决方案, 该怎么加?
-//type AopDB struct {
+// // AopDB sql.DB 上加 AOP 解决方案, 该怎么加?
+// type AopDB struct {
 //	db sql.DB
 //	ms []Middleware
-//}
+// }
 //
-//type Middleware func(next Handler) Handler
+// type Middleware func(next Handler) Handler
 //
-//type AopDBContext struct {
+// type AopDBContext struct {
 //	query string
 //	args  []any
-//}
+// }
 //
-//type AopDBResult struct {
+// type AopDBResult struct {
 //	row *sql.Row
-//}
+// }
 
 //
-//type Handler func(ctx *AopDBContext) *AopDBResult
+// type Handler func(ctx *AopDBContext) *AopDBResult
 //
-//func (db *AopDB) QueryRowContext(ctx context.Context, query string, args ...any) *sql.Row {
+// func (db *AopDB) QueryRowContext(ctx context.Context, query string, args ...any) *sql.Row {
 //	// 在这之前做点东西
 //	var handler Handler = func(actx *AopDBContext) *AopDBResult {
 //		row := db.db.QueryRowContext(ctx, actx.query, actx.args...)
@@ -38,4 +38,4 @@ package v0
 //	}
 //	res := handler(&AopDBContext{})
 //	return res.row
-//}
+// }

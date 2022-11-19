@@ -113,14 +113,14 @@ func NewInserter[T any](db *DB) *Inserter[T] {
 
 type UpsertBuilder[T any] struct {
 	i *Inserter[T]
-	//where           []Predicate
+	// where           []Predicate
 	conflictColumns []string
 }
 
 type Upsert struct {
 	assigns         []Assignable
 	conflictColumns []string
-	//doNothing bool
+	// doNothing bool
 }
 
 func (i *Inserter[T]) Upsert() *UpsertBuilder[T] {
@@ -144,15 +144,15 @@ func (o *UpsertBuilder[T]) Update(assigns ...Assignable) *Inserter[T] {
 }
 
 // 很少使用
-//func (o *UpsertBuilder[T]) Where(ps ...Predicate) *UpsertBuilder[T] {
-//	o.where = ps
-//	return o
-//}
+// func (o *UpsertBuilder[T]) Where(ps ...Predicate) *UpsertBuilder[T] {
+// 	o.where = ps
+// 	return o
+// }
 //
 // 很少使用
-//func (o *UpsertBuilder[T]) DoNothing(assigns ...Assignable) *Inserter[T] {
-//	o.i.onDuplicate = &Upsert{
-//		doNothing: true,
-//	}
-//	return o.i
-//}
+// func (o *UpsertBuilder[T]) DoNothing(assigns ...Assignable) *Inserter[T] {
+// 	o.i.onDuplicate = &Upsert{
+// 		doNothing: true,
+// 	}
+// 	return o.i
+// }
