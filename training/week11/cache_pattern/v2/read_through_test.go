@@ -4,14 +4,14 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	orm "gitlab.xchch.top/zhangsai/go-101/training/week10/orm_v10/v2"
+	"gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v10/v2"
 	"strings"
 	"testing"
 	"time"
 )
 
 func TestReadThroughCache_Get(t *testing.T) {
-	var db *orm.DB
+	var db *v2.DB
 
 	userCache := &ReadThroughCache[*User]{
 		Cache:      NewLocalCache(),
@@ -20,7 +20,7 @@ func TestReadThroughCache_Get(t *testing.T) {
 			if strings.HasSuffix(key, "/user/") {
 				// 找用户的数据
 				id := strings.Trim(key, "/user/")
-				return orm.NewSelector[User](db).Where(orm.C("id").EQ(id)).Get(ctx)
+				return v2.NewSelector[User](db).Where(v2.C("id").EQ(id)).Get(ctx)
 			}
 			return nil, errors.New("不支持操作")
 		},
@@ -34,7 +34,7 @@ func TestReadThroughCache_Get(t *testing.T) {
 }
 
 func TestReadThroughCache_GetV2(t *testing.T) {
-	var db *orm.DB
+	var db *v2.DB
 
 	userCache := &ReadThroughCacheV2[*User]{
 		// 这边考虑创建一个CacheV2
@@ -44,7 +44,7 @@ func TestReadThroughCache_GetV2(t *testing.T) {
 			if strings.HasSuffix(key, "/user/") {
 				// 找用户的数据
 				id := strings.Trim(key, "/user/")
-				return orm.NewSelector[User](db).Where(orm.C("id").EQ(id)).Get(ctx)
+				return v2.NewSelector[User](db).Where(v2.C("id").EQ(id)).Get(ctx)
 			}
 			return nil, errors.New("不支持操作")
 		},
