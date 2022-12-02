@@ -33,7 +33,7 @@ Redis的过期处理, 也是用的类似的策略: get的时候检查是否过�
 
 mockgen使用
 cd training\week11\redis_cache\v1
-go install github.com/golang/mock/mockgen@1.6.0
+go install github.com/golang/mock/mockgen@v1.6.0
 mockgen -package mocks -destination mocks/redis_cmdable.mock.go -source C:\Users\{name}\go\pkg\mod\github.com\go-redis\redis\v9@v9.0.0-rc.1/commands.go
 
 代码实现 redis_cache
