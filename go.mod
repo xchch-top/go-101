@@ -31,8 +31,10 @@ require (
 	go.uber.org/multierr v1.6.0
 	go.uber.org/zap v1.17.0
 	golang.org/x/crypto v0.0.0-20220517005047-85d78b3ac167
+	golang.org/x/exp v0.0.0-20200224162631-6cc2880d07d6
+	golang.org/x/net v0.0.0-20220722155237-a158d28d115b
 	golang.org/x/sync v0.0.0-20220819030929-7fc1605a5dde
-	google.golang.org/grpc v1.41.0
+	google.golang.org/grpc v1.50.1
 	google.golang.org/protobuf v1.28.0
 	gorm.io/driver/sqlite v1.1.4
 	gorm.io/gorm v1.20.12
@@ -118,7 +120,6 @@ require (
 	go.etcd.io/etcd/client/pkg/v3 v3.5.4 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
 	golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4 // indirect
-	golang.org/x/net v0.0.0-20220722155237-a158d28d115b // indirect
 	golang.org/x/sys v0.0.0-20220722155257-8c9f86f7a55f // indirect
 	golang.org/x/text v0.3.7 // indirect
 	google.golang.org/genproto v0.0.0-20210602131652-f16073e35f0c // indirect
