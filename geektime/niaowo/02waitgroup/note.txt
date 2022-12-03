@@ -1,0 +1,12 @@
+WaitGroup的三个方法
+Add: 用来设置WaitGroup的计数值
+Done: 用来将WaitGroup的计数值减1, 其实就是调用了 Add(-1)
+Wait: 调用这个方法的goroutine会一直阻塞, 知道WaitGroup的计数值变为0
+
+使用WaitGroup时的常见错误
+1. WaitGroup的计数器的值必须大于等于0, 如果计数值被设置为负数, 就会导致panic
+2. 调用Done方法次数过多, 超过了WaitGroup的计数值
+
+WaitGroup使用原则
+等所有Add方法调用之后再调用Wait
+虽然WaitGroup是可重用的, 但是不要重复使用WaitGroup, 新建一个WaitGroup不会带来多大的资源开销
