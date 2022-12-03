@@ -1,0 +1,41 @@
+临界区就是一个被共享的资源, 或者说是一个整体的一组共享资源. 使用互斥锁, 限定临界区只能由一个线程持有
+
+同步原语的适用场景
+共享资源: 并发地读写共享资源, 会出现数据竞争(data race)的问题, 所以需要Mutex, RWMutex这样的并发原语来保护
+任务编排: 需要goroutine按照一定的规律执行, 而goroutine之间有相互依赖或者依赖的顺序关系, 我们尝尝使用WaitGroup或者Channel来实现
+消息传递: 信息交流以及不同goroutine之间的线程安全的数据交流, 常常使用channel来实现
+
+代码演示 10个线程对一个变量count进行加1, 每个goroutine执行10万次的加1操作
+c1_v1: count累加后结果是638966, 原因count++不是原子操作
+c1_v2: 加mutex锁, count累加后结果是1000000
+c1_v3: 将mutex和count封装为一个Counter结构体
+c1_v4: 把获取锁, 释放锁, 计数加1的逻辑封装成1个方法
+
+Unlock方法可以被任意的goroutine调用释放锁, 即使是没有持有这个互斥锁的goroutine, Mutex的这个设计一直保持至今
+所以在使用Mutex的时候, 必须要保证goroutine尽可能不去释放自己未持有的锁, 一定要遵循 '谁申请 谁释放' 的原则
+
+Mutex四种易错场景
+1. Lock/Unlock不是成对出现
+2. copy已有的Mutex
+    现象: 带有锁的结构体作为方法的参数传入方法, 这时会复制结构体
+3. 锁重入
+    mutex不是可重入锁
+4. 死锁
+    死锁的四个条件 ①互斥 资源是被排他性独享的 ②持有和等待 goroutine持有一个资源, 并且还在请求其他goroutine持有的资源 ③不可剥夺 资源只能由持有它的goroutine来释放 ④环路等待
+
+代码演示
+c3_v1: copy已有的Mutex, 方法调用结果为deadlock
+c3_v2: 锁重入, 方法调用结果为deadlock
+
+锁时性能下降的罪魁祸首之一, 所以, 有效地降低锁竞争, 就能更好地提高性能, 因此, 监控关键互斥锁上等待的goroutine的数量, 是分析锁竞争的激烈成都的一个重要指标
+
+TryLock方法
+当一个goroutine调用TryLock方法请求锁的时候, 如果这把锁没有被其他goroutine所持有, 那么这个goroutine就持有了这把锁, 并返回true
+如果这把锁已经被其他goroutine锁持有, 或者正在准备交给某个被唤醒的goroutine, 那么这个请求锁的goroutine就直接返回false, 不会阻塞在方法调用上.
+
+如果你遇到可以明确区分reader和writer的场景, 且有大量的并发读, 少量的并发写, 并且有清冽的性能需求, 你就可以考虑使用读写锁RWMutex替换Mutex
+Go标准库中的RWMutex设计时Write-Preferring方案, 一个正在阻塞的Lock调用会排除新的reader请求到锁.
+当writer请求锁的时候, 是无法改变既有的reader持有锁的现实的, 也不会强制这些reader释放锁, 它的优先权只是限定后来的reader不要和它抢.
+
+代码演示
+c4_v1: 线程安全的先进先出队列
