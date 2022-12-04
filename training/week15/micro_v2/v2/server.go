@@ -1,7 +1,7 @@
-package v1
+package v2
 
 import (
-	"gitlab.xchch.top/zhangsai/go-101/training/week15/micro_v2/v1/registry"
+	"gitlab.xchch.top/zhangsai/go-101/training/week15/micro_v2/v2/registry"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"net"
