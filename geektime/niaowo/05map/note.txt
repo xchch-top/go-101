@@ -23,7 +23,6 @@ sync.Map是生产环境中很少使用的同步原语
 带过期功能的timedmap https://github.com/zekroTJA/timedmap
 使用红黑树实现的key有序的treemap github.com/emirpasic/gods/maps/treemap
 
-
 代码演示
 c9_v1: 使用struct作为map的key
 c9_v2: 对map并发读写导致panic
