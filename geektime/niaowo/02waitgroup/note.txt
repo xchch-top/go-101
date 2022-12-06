@@ -10,3 +10,6 @@ Wait: 调用这个方法的goroutine会一直阻塞, 知道WaitGroup的计数值
 WaitGroup使用原则
 等所有Add方法调用之后再调用Wait
 虽然WaitGroup是可重用的, 但是不要重复使用WaitGroup, 新建一个WaitGroup不会带来多大的资源开销
+
+代码演示
+c6_v1: WaitGroup进行安全的计数

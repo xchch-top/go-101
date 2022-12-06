@@ -1,0 +1,30 @@
+map的基本使用方法 map[K]V
+key的类型K必须是可比较的(comparable), 也就是可以通过==和!=操作符进行比较; value的值和类型无所谓, 可以是任意的类型, 或者nil
+bool, 整数, 浮点数, 复数, 字符串, 指针, Channel, 接口都是可比较的, 包含可比较元素的struct和数组, 这俩也是可比较的, 而slice, map. 函数值都是不可比较的
+如果使用struct类型做key其实是有坑的, 因为如果struct的某个字段修改了 ,查询map时无法获取它add进去的值
+
+map是无序的, 如果我们想要按照key的顺序获取map的值, 需要先取出素有key进行排序, 然后按照这个排序的key一次获取对应的值
+
+map的两种常见错误
+1. 未初始化
+    和slice或者mutex, RWMutex等struct类型不同, map对象必须在使用之前初始化, 如果不初始化就直接赋值的话, 会出现panic异常
+    从一个nil的map对象中获取值不会panic, 而是会得到零值
+2. 并发读写
+    map对象不是线程(goroutine)安全的, 并发读写的时候会有检查, 遇到并发问题就会导致panic
+
+可以利用读写锁实现线程安全的map, 代码见c9_v3
+虽然使用读写锁可以提供线程安全的map, 但是在大量并发读写的情况下, 锁竞争是非常激烈的, 锁是性能下降的万恶之源之一
+对于go开发的应用程序来说, 并发是常用的一个特性, 在这种情况下, 我们能做的就是, 尽量减少锁的粒度和锁的时间
+
+减少锁的粒度常用的方法就是分片(Shard), 将一把锁分成几把锁, 每个锁控制一个分片, go比较致命的分片并发map的实现是concurrent-map https://github.com/orcaman/concurrent-map
+如果追求更高的性能, 显然是分片加锁更好, 因为它可以降低锁的粒度, 提高访问此map对象的吞吐, 如果并发性能要求不是那么高的场景, 简单加锁方式更简单
+
+sync.Map是生产环境中很少使用的同步原语
+带过期功能的timedmap https://github.com/zekroTJA/timedmap
+使用红黑树实现的key有序的treemap github.com/emirpasic/gods/maps/treemap
+
+
+代码演示
+c9_v1: 使用struct作为map的key
+c9_v2: 对map并发读写导致panic
+c9_v3: 利用读写锁实现线程安全的map[int]int
