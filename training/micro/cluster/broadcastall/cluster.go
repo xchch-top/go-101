@@ -77,7 +77,7 @@ func (b ClusterBuilder) BuildUnary() grpc.UnaryClientInterceptor {
 				val := r.Interface()
 				err = conn.Invoke(ctx, method, req, val, opts...)
 				// 这种写法的风险在于，如果用户没有接收响应，
-				// 那么这里会阻塞导致 goroutine 泄露
+				// 那么这里会阻塞导致 goroutine 泄漏
 				ch <- Resp{Err: err, Val: val}
 				wg.Done()
 			}()

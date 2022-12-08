@@ -1,10 +1,15 @@
-go语言的CSP模型的实现包含两个重要组成部分: 一个是goroutine, 它是并发应用设计的基本构建和执行单元; 另一个就是channel, channel既可以用来实现goroutine间的通信, 还可以实现goroutine间的同步
+go语言的CSP模型的实现包含两个重要组成部分
+一个是goroutine, 它是并发应用设计的基本构建和执行单元
+另一个就是channel, channel既可以用来实现goroutine间的通信, 还可以实现goroutine间的同步
 
 如果channel类型变量在声明时没有被赋值, 那么它的默认值是nil, 为channel类型变量赋初值的唯一方法就是使用make这个go预定义的函数
+nil是chan的零值, 是一种特殊的chan, 对值是nil的chan的发送接收, 调用者总是会租的
 
-由于无缓冲channel的运行时层实现不带有缓冲区, 所以goroutine对无缓冲channel的接收和发送操作是同步的. 对同一个无缓冲channel, 只有对它进行接收操作的goroutine和对它进行发送操作的goroutine都存在的情况下, 通信才能得以进行, 否则单方面的操作会让对应的goroutine陷入挂起状态.
+由于无缓冲channel的运行时层实现不带有缓冲区, 所以goroutine对无缓冲channel的接收和发送操作是同步的.
+对同一个无缓冲channel, 只有对它进行接收操作的goroutine和对它进行发送操作的goroutine都存在的情况下, 通信才能得以进行.
+否则单方面的操作会让对应的goroutine陷入挂起状态.
 
-对一个带缓冲channel来说, 在缓冲区未满的情况下, 对它进行发送操作的goroutine并不会阻塞挂起; 在缓冲区有数据的情况下, 对他进行接收操作的goroutine也不会阻塞挂起
+对一个带缓冲channel来说, 在缓冲区未满的情况下, 对它进行发送操作的goroutine并不会阻塞挂起; 在缓冲区有数据的情况下, 对它进行接收操作的goroutine也不会阻塞挂起
 但是当缓冲区满了的情况下, 对它进行发送操作的goroutine就会阻塞挂起; 当缓存区为空的情况下, 对它进行接收操作的goroutine也会阻塞挂起
 
 使用操作符 <-, 我们还可以声明只发送channel类型和只接收channel类型.
@@ -18,4 +23,4 @@ ch := make(<-chan int, 1) // 只接收channel类型
 
 无缓冲channel的惯用法  ①用作信号传递 ②用于替代锁机制
 
-go语言提倡的 不要通过共享内存来通信, 而是通过通信来共享内存
+go语言提倡的 不要通过共享内存的方式通信, 而是通过channel通信的方式分享数据
