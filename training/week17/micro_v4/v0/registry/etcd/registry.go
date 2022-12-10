@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"gitlab.xchch.top/zhangsai/go-101/training/week17/micro_v4/v0/registry"
+	"gitlab.xchch.top/golang-group/go-101/training/week17/micro_v4/v0/registry"
 	"go.etcd.io/etcd/api/v3/mvccpb"
 	clientV3 "go.etcd.io/etcd/client/v3"
 	"go.etcd.io/etcd/client/v3/concurrency"

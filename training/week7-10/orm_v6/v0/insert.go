@@ -1,8 +1,8 @@
 package v0
 
 import (
-	"gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v6/v0/internal/errs"
-	"gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v6/v0/model"
+	"gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v6/v0/internal/errs"
+	"gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v6/v0/model"
 	"reflect"
 	"strings"
 )

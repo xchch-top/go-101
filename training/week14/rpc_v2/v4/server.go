@@ -3,9 +3,9 @@ package v4
 import (
 	"context"
 	"errors"
-	"gitlab.xchch.top/zhangsai/go-101/training/week14/rpc_v2/v4/message"
-	"gitlab.xchch.top/zhangsai/go-101/training/week14/rpc_v2/v4/serialize"
-	"gitlab.xchch.top/zhangsai/go-101/training/week14/rpc_v2/v4/serialize/json"
+	"gitlab.xchch.top/golang-group/go-101/training/week14/rpc_v2/v4/message"
+	"gitlab.xchch.top/golang-group/go-101/training/week14/rpc_v2/v4/serialize"
+	"gitlab.xchch.top/golang-group/go-101/training/week14/rpc_v2/v4/serialize/json"
 	"log"
 	"net"
 	"reflect"

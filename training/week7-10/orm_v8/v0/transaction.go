@@ -3,8 +3,8 @@ package v0
 import (
 	"context"
 	"database/sql"
-	"gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v8/v0/internal/valuer"
-	"gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v8/v0/model"
+	"gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v8/v0/internal/valuer"
+	"gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v8/v0/model"
 )
 
 type Tx struct {

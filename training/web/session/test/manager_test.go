@@ -2,10 +2,10 @@ package test
 
 import (
 	"github.com/google/uuid"
-	"gitlab.xchch.top/zhangsai/go-101/training/web"
-	"gitlab.xchch.top/zhangsai/go-101/training/web/session"
-	"gitlab.xchch.top/zhangsai/go-101/training/web/session/cookie"
-	"gitlab.xchch.top/zhangsai/go-101/training/web/session/memory"
+	"gitlab.xchch.top/golang-group/go-101/training/web"
+	"gitlab.xchch.top/golang-group/go-101/training/web/session"
+	"gitlab.xchch.top/golang-group/go-101/training/web/session/cookie"
+	"gitlab.xchch.top/golang-group/go-101/training/web/session/memory"
 	"net/http"
 	"testing"
 	"time"

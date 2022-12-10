@@ -3,7 +3,7 @@ package v1
 import (
 	"context"
 	"encoding/json"
-	"gitlab.xchch.top/zhangsai/go-101/training/week14/rpc_v2/v1/message"
+	"gitlab.xchch.top/golang-group/go-101/training/week14/rpc_v2/v1/message"
 	"reflect"
 	"sync/atomic"
 )

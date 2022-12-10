@@ -4,8 +4,8 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	rpc "gitlab.xchch.top/zhangsai/go-101/training/week14/rpc_v3/v1"
-	"gitlab.xchch.top/zhangsai/go-101/training/week14/rpc_v3/v1/example/rpc/proto/gen"
+	rpc "gitlab.xchch.top/golang-group/go-101/training/week14/rpc_v3/v1"
+	"gitlab.xchch.top/golang-group/go-101/training/week14/rpc_v3/v1/example/rpc/proto/gen"
 )
 
 func main() {

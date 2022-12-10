@@ -2,8 +2,8 @@ package valuer
 
 import (
 	"database/sql"
-	"gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v9/v2/internal/errs"
-	orm "gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v9/v2/model"
+	"gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v9/v2/internal/errs"
+	orm "gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v9/v2/model"
 	"reflect"
 )
 

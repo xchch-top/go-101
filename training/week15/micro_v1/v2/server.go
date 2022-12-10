@@ -2,7 +2,7 @@ package v2
 
 import (
 	"context"
-	"gitlab.xchch.top/zhangsai/go-101/training/week15/micro_v1/v2/registry"
+	"gitlab.xchch.top/golang-group/go-101/training/week15/micro_v1/v2/registry"
 	"google.golang.org/grpc"
 	"net"
 	"time"

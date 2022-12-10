@@ -2,7 +2,7 @@ package v1
 
 import (
 	"context"
-	"gitlab.xchch.top/zhangsai/go-101/training/week14/rpc_v2/v1/message"
+	"gitlab.xchch.top/golang-group/go-101/training/week14/rpc_v2/v1/message"
 )
 
 type Proxy interface {

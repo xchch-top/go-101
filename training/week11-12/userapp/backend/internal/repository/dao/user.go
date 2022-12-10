@@ -4,8 +4,8 @@ import (
 	"context"
 	"github.com/go-sql-driver/mysql"
 	"github.com/opentracing/opentracing-go"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm"
-	"gitlab.xchch.top/zhangsai/go-101/training/week11-12/userapp/backend/internal/repository/dao/model"
+	"gitlab.xchch.top/golang-group/go-101/training/orm"
+	"gitlab.xchch.top/golang-group/go-101/training/week11-12/userapp/backend/internal/repository/dao/model"
 )
 
 //go:generate mockgen -source=user.go -destination=mocks/user_mock.gen.go -package=daomocks UserDAO

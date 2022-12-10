@@ -2,7 +2,7 @@ package server
 
 import (
 	"context"
-	"gitlab.xchch.top/zhangsai/go-101/training/week14/rpc_v2/v4/example/rpc/proto/gen"
+	"gitlab.xchch.top/golang-group/go-101/training/week14/rpc_v2/v4/example/rpc/proto/gen"
 )
 
 // UserServiceProto 用来测试 protobuf 协议

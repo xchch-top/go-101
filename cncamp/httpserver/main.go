@@ -8,7 +8,7 @@ import (
 	"os"
 	"strings"
 
-	"gitlab.xchch.top/zhangsai/go-101/cncamp/httpserver/xxutil"
+	"gitlab.xchch.top/golang-group/go-101/cncamp/httpserver/xxutil"
 )
 
 func main() {

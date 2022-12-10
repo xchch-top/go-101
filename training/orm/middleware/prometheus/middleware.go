@@ -3,7 +3,7 @@ package prometheus
 import (
 	"context"
 	"github.com/prometheus/client_golang/prometheus"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm"
+	"gitlab.xchch.top/golang-group/go-101/training/orm"
 	"time"
 )
 

@@ -6,7 +6,7 @@ package usmocks
 
 import (
 	context "context"
-	"gitlab.xchch.top/zhangsai/go-101/training/week11-12/userapp/backend/internal/domainobject/entity"
+	"gitlab.xchch.top/golang-group/go-101/training/week11-12/userapp/backend/internal/domainobject/entity"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"

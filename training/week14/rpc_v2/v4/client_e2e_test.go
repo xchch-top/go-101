@@ -5,9 +5,9 @@ package v4
 import (
 	"context"
 	"github.com/stretchr/testify/require"
-	"gitlab.xchch.top/zhangsai/go-101/training/week14/rpc_v2/v4/example/rpc/proto/gen"
-	"gitlab.xchch.top/zhangsai/go-101/training/week14/rpc_v2/v4/example/rpc/server"
-	"gitlab.xchch.top/zhangsai/go-101/training/week14/rpc_v2/v4/serialize/proto"
+	"gitlab.xchch.top/golang-group/go-101/training/week14/rpc_v2/v4/example/rpc/proto/gen"
+	"gitlab.xchch.top/golang-group/go-101/training/week14/rpc_v2/v4/example/rpc/server"
+	"gitlab.xchch.top/golang-group/go-101/training/week14/rpc_v2/v4/serialize/proto"
 	"log"
 	"testing"
 )

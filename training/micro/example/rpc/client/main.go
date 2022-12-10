@@ -4,8 +4,8 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"gitlab.xchch.top/zhangsai/go-101/training/micro/example/rpc/proto/gen"
-	"gitlab.xchch.top/zhangsai/go-101/training/micro/rpc"
+	"gitlab.xchch.top/golang-group/go-101/training/micro/example/rpc/proto/gen"
+	"gitlab.xchch.top/golang-group/go-101/training/micro/rpc"
 )
 
 func main() {

@@ -4,7 +4,7 @@ import (
 	"context"
 	"entgo.io/ent/dialect"
 	_ "github.com/mattn/go-sqlite3"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/ent/ent"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/ent/ent"
 	"log"
 	"testing"
 )

@@ -3,7 +3,7 @@ package v0
 import (
 	"context"
 	"fmt"
-	"gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v9/v0/internal/errs"
+	"gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v9/v0/internal/errs"
 	"strings"
 )
 

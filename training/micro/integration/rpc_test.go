@@ -5,7 +5,7 @@ import (
 	"errors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"gitlab.xchch.top/zhangsai/go-101/training/micro/rpc"
+	"gitlab.xchch.top/golang-group/go-101/training/micro/rpc"
 	"testing"
 	"time"
 )

@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/go-redis/redis/v9"
-	"gitlab.xchch.top/zhangsai/go-101/training/web/session"
+	"gitlab.xchch.top/golang-group/go-101/training/web/session"
 	"time"
 )
 

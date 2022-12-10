@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"gitlab.xchch.top/zhangsai/go-101/training/micro/example/rpc/proto/gen"
+	"gitlab.xchch.top/golang-group/go-101/training/micro/example/rpc/proto/gen"
 )
 
 // UserServiceProto 用来测试 protobuf 协议

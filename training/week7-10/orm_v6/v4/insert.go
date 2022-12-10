@@ -2,8 +2,8 @@ package v4
 
 import (
 	"context"
-	"gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v6/v4/internal/errs"
-	"gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v6/v4/model"
+	"gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v6/v4/internal/errs"
+	"gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v6/v4/model"
 )
 
 type Inserter[T any] struct {

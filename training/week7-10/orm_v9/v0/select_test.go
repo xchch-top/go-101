@@ -7,7 +7,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v9/v0/internal/errs"
+	"gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v9/v0/internal/errs"
 	"testing"
 )
 

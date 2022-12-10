@@ -9,8 +9,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
-	"gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v9/v2"
-	"gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v9/v2/internal/test"
+	"gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v9/v2"
+	"gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v9/v2/internal/test"
 	"testing"
 )
 

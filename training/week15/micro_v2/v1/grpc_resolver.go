@@ -1,7 +1,7 @@
 package v1
 
 import (
-	"gitlab.xchch.top/zhangsai/go-101/training/week15/micro_v2/v1/registry"
+	"gitlab.xchch.top/golang-group/go-101/training/week15/micro_v2/v1/registry"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/resolver"

@@ -2,7 +2,7 @@ package accesslog
 
 import (
 	"encoding/json"
-	"gitlab.xchch.top/zhangsai/go-101/training/week4-6/web_v8/v4"
+	"gitlab.xchch.top/golang-group/go-101/training/week4-6/web_v8/v4"
 	"io/ioutil"
 	"log"
 )

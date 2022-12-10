@@ -6,7 +6,7 @@ package daomocks
 
 import (
 	context "context"
-	"gitlab.xchch.top/zhangsai/go-101/training/week11-12/userapp/backend/internal/repository/dao/model"
+	"gitlab.xchch.top/golang-group/go-101/training/week11-12/userapp/backend/internal/repository/dao/model"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"

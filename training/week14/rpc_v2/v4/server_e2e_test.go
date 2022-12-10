@@ -3,9 +3,9 @@
 package v4
 
 import (
-	gen "gitlab.xchch.top/zhangsai/go-101/training/week14/rpc_v2/v4/example/rpc/server"
-	"gitlab.xchch.top/zhangsai/go-101/training/week14/rpc_v2/v4/serialize/json"
-	"gitlab.xchch.top/zhangsai/go-101/training/week14/rpc_v2/v4/serialize/proto"
+	gen "gitlab.xchch.top/golang-group/go-101/training/week14/rpc_v2/v4/example/rpc/server"
+	"gitlab.xchch.top/golang-group/go-101/training/week14/rpc_v2/v4/serialize/json"
+	"gitlab.xchch.top/golang-group/go-101/training/week14/rpc_v2/v4/serialize/proto"
 	"testing"
 )
 

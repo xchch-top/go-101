@@ -4,7 +4,7 @@ package user
 
 import (
 	"entgo.io/ent/dialect/sql"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/ent/ent/predicate"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/ent/ent/predicate"
 )
 
 // ID filters vertices based on their ID field.

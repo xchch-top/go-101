@@ -8,7 +8,7 @@ import (
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/ent/ent/user"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/ent/ent/user"
 )
 
 // UserCreate is the builder for creating a User entity.

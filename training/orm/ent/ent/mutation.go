@@ -9,7 +9,7 @@ import (
 	"sync"
 
 	"entgo.io/ent"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/ent/ent/predicate"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/ent/ent/predicate"
 )
 
 const (

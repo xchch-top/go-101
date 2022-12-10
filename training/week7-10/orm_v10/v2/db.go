@@ -3,8 +3,8 @@ package v2
 import (
 	"context"
 	"database/sql"
-	valuer2 "gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v10/v2/internal/valuer"
-	model2 "gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v10/v2/model"
+	valuer2 "gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v10/v2/internal/valuer"
+	model2 "gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v10/v2/model"
 	"go.uber.org/multierr"
 	"reflect"
 )

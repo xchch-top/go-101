@@ -5,7 +5,7 @@ import (
 	"github.com/go-redis/redis/v9"
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
-	"gitlab.xchch.top/zhangsai/go-101/training/week11-12/cache_pattern/v3/mocks"
+	"gitlab.xchch.top/golang-group/go-101/training/week11-12/cache_pattern/v3/mocks"
 	"testing"
 	"time"
 )

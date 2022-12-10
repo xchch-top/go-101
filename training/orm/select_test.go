@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"github.com/DATA-DOG/go-sqlmock"
 	"github.com/stretchr/testify/assert"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/internal/errs"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/internal/valuer"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/internal/errs"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/internal/valuer"
 	"testing"
 )
 
@@ -757,12 +757,12 @@ func TestSelector_Get(t *testing.T) {
 // 我的输出结果
 // goos: linux
 // goarch: amd64
-// pkg: gitlab.xchch.top/zhangsai/go-101/training/orm
+// pkg: gitlab.xchch.top/golang-group/go-101/training/orm
 // cpu: Intel(R) Core(TM) i5-10400F CPU @ 2.90GHz
 // BenchmarkQuerier_Get/unsafe-12             10000            453677 ns/op            3246 B/op        108 allocs/op
 // BenchmarkQuerier_Get/reflect-12            10000           1173199 ns/op            3427 B/op        117 allocs/op
 // PASS
-// ok      gitlab.xchch.top/zhangsai/go-101/training/orm     16.324s
+// ok      gitlab.xchch.top/golang-group/go-101/training/orm     16.324s
 func BenchmarkQuerier_Get(b *testing.B) {
 	db, err := Open("sqlite3", fmt.Sprintf("file:benchmark_get.db?cache=shared&mode=memory"))
 	if err != nil {

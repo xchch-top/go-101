@@ -9,7 +9,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	registry "gitlab.xchch.top/zhangsai/go-101/training/week15/micro_v1/v1/registry"
+	registry "gitlab.xchch.top/golang-group/go-101/training/week15/micro_v1/v1/registry"
 )
 
 // MockRegistry is a mock of Registry interface.

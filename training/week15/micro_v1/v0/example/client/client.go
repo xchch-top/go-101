@@ -2,9 +2,9 @@ package main
 
 import (
 	"context"
-	micro "gitlab.xchch.top/zhangsai/go-101/training/week15/micro_v1/v0"
-	"gitlab.xchch.top/zhangsai/go-101/training/week15/micro_v1/v0/example/proto/gen"
-	"gitlab.xchch.top/zhangsai/go-101/training/week15/micro_v1/v0/registry"
+	micro "gitlab.xchch.top/golang-group/go-101/training/week15/micro_v1/v0"
+	"gitlab.xchch.top/golang-group/go-101/training/week15/micro_v1/v0/example/proto/gen"
+	"gitlab.xchch.top/golang-group/go-101/training/week15/micro_v1/v0/registry"
 	"google.golang.org/grpc"
 	"log"
 )

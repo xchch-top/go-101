@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"github.com/silenceper/pool"
-	"gitlab.xchch.top/zhangsai/go-101/training/week14/rpc_v2/v1/message"
+	"gitlab.xchch.top/golang-group/go-101/training/week14/rpc_v2/v1/message"
 	"net"
 	"time"
 )

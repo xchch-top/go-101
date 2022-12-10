@@ -3,7 +3,7 @@ package v0
 import (
 	"context"
 	"errors"
-	"gitlab.xchch.top/zhangsai/go-101/training/week11-12/redis_cache/v0/internal/errs"
+	"gitlab.xchch.top/golang-group/go-101/training/week11-12/redis_cache/v0/internal/errs"
 	"sync"
 	"sync/atomic"
 	"time"

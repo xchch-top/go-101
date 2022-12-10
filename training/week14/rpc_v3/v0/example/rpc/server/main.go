@@ -1,9 +1,9 @@
 package main
 
 import (
-	rpc "gitlab.xchch.top/zhangsai/go-101/training/week14/rpc_v3/v0"
-	"gitlab.xchch.top/zhangsai/go-101/training/week14/rpc_v3/v0/serialize/json"
-	"gitlab.xchch.top/zhangsai/go-101/training/week14/rpc_v3/v0/serialize/proto"
+	rpc "gitlab.xchch.top/golang-group/go-101/training/week14/rpc_v3/v0"
+	"gitlab.xchch.top/golang-group/go-101/training/week14/rpc_v3/v0/serialize/json"
+	"gitlab.xchch.top/golang-group/go-101/training/week14/rpc_v3/v0/serialize/proto"
 )
 
 func main() {

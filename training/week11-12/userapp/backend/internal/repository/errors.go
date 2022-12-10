@@ -2,7 +2,7 @@ package repository
 
 import (
 	"errors"
-	"gitlab.xchch.top/zhangsai/go-101/training/week11-12/userapp/backend/internal/repository/dao"
+	"gitlab.xchch.top/golang-group/go-101/training/week11-12/userapp/backend/internal/repository/dao"
 )
 
 var (

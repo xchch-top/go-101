@@ -1,7 +1,7 @@
 package opentelemetry
 
 import (
-	"gitlab.xchch.top/zhangsai/go-101/training/week4-6/web_v9/v1"
+	"gitlab.xchch.top/golang-group/go-101/training/week4-6/web_v9/v1"
 	"go.opentelemetry.io/otel"
 	"testing"
 	"time"

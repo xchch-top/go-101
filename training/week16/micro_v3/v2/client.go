@@ -2,7 +2,7 @@ package v2
 
 import (
 	"fmt"
-	"gitlab.xchch.top/zhangsai/go-101/training/week16/micro_v3/v2/registry"
+	"gitlab.xchch.top/golang-group/go-101/training/week16/micro_v3/v2/registry"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/balancer"

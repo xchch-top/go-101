@@ -5,8 +5,8 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v9/v1"
-	"gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v9/v1/internal/test"
+	"gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v9/v1"
+	"gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v9/v1/internal/test"
 	"testing"
 )
 

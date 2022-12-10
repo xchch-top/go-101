@@ -2,9 +2,9 @@ package session
 
 import (
 	"github.com/google/uuid"
-	"gitlab.xchch.top/zhangsai/go-101/training/week4-6/web_v9/v1"
-	"gitlab.xchch.top/zhangsai/go-101/training/week4-6/web_v9/v1/session/cookie"
-	"gitlab.xchch.top/zhangsai/go-101/training/week4-6/web_v9/v1/session/memory"
+	"gitlab.xchch.top/golang-group/go-101/training/week4-6/web_v9/v1"
+	"gitlab.xchch.top/golang-group/go-101/training/week4-6/web_v9/v1/session/cookie"
+	"gitlab.xchch.top/golang-group/go-101/training/week4-6/web_v9/v1/session/memory"
 	"net/http"
 	"testing"
 	"time"

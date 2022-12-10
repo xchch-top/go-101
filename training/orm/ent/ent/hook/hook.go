@@ -6,7 +6,7 @@ import (
 	"context"
 	"fmt"
 
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/ent/ent"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/ent/ent"
 )
 
 // The UserFunc type is an adapter to allow the use of ordinary

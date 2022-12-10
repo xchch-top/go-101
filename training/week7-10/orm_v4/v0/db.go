@@ -2,8 +2,8 @@ package v0
 
 import (
 	"database/sql"
-	valuer2 "gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v4/v0/internal/valuer"
-	model2 "gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v4/v0/model"
+	valuer2 "gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v4/v0/internal/valuer"
+	model2 "gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v4/v0/model"
 	"reflect"
 )
 

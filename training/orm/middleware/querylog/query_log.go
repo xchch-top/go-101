@@ -2,7 +2,7 @@ package querylog
 
 import (
 	"context"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm"
+	"gitlab.xchch.top/golang-group/go-101/training/orm"
 	"log"
 )
 

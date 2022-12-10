@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"gitlab.xchch.top/zhangsai/go-101/geektime/tonybai/method"
+	"gitlab.xchch.top/golang-group/go-101/geektime/tonybai/method"
 )
 
 func main() {

@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"gitlab.xchch.top/zhangsai/go-101/training/week15/micro_v2/v2/example/proto/gen"
+	"gitlab.xchch.top/golang-group/go-101/training/week15/micro_v2/v2/example/proto/gen"
 )
 
 type UserService struct {

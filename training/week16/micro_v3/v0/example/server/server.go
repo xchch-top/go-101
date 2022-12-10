@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	micro "gitlab.xchch.top/zhangsai/go-101/training/week16/micro_v3/v0"
-	"gitlab.xchch.top/zhangsai/go-101/training/week16/micro_v3/v0/example/proto/gen"
-	"gitlab.xchch.top/zhangsai/go-101/training/week16/micro_v3/v0/registry/etcd"
+	micro "gitlab.xchch.top/golang-group/go-101/training/week16/micro_v3/v0"
+	"gitlab.xchch.top/golang-group/go-101/training/week16/micro_v3/v0/example/proto/gen"
+	"gitlab.xchch.top/golang-group/go-101/training/week16/micro_v3/v0/registry/etcd"
 	clientV3 "go.etcd.io/etcd/client/v3"
 	"golang.org/x/sync/errgroup"
 	"strconv"

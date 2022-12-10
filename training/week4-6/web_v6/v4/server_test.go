@@ -2,8 +2,8 @@ package v4
 
 import (
 	"fmt"
-	"gitlab.xchch.top/zhangsai/go-101/training/week4-6/web_v6/v4/middleware/accesslog"
-	"gitlab.xchch.top/zhangsai/go-101/training/week4-6/web_v6/v4/middleware/repeat_body"
+	"gitlab.xchch.top/golang-group/go-101/training/week4-6/web_v6/v4/middleware/accesslog"
+	"gitlab.xchch.top/golang-group/go-101/training/week4-6/web_v6/v4/middleware/repeat_body"
 	"net/http"
 	"testing"
 )

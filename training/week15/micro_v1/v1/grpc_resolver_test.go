@@ -3,8 +3,8 @@ package v1
 import (
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
-	"gitlab.xchch.top/zhangsai/go-101/training/week15/micro_v1/v1/registry"
-	"gitlab.xchch.top/zhangsai/go-101/training/week15/micro_v1/v1/registry/mocks"
+	"gitlab.xchch.top/golang-group/go-101/training/week15/micro_v1/v1/registry"
+	"gitlab.xchch.top/golang-group/go-101/training/week15/micro_v1/v1/registry/mocks"
 	"google.golang.org/grpc/resolver"
 	"testing"
 	"time"

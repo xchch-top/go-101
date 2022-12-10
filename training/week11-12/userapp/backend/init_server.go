@@ -1,12 +1,12 @@
 package main
 
 import (
-	"gitlab.xchch.top/zhangsai/go-101/training/web"
-	"gitlab.xchch.top/zhangsai/go-101/training/web/middleware/accesslog"
-	"gitlab.xchch.top/zhangsai/go-101/training/web/middleware/cors"
-	"gitlab.xchch.top/zhangsai/go-101/training/web/middleware/opentelemetry"
-	"gitlab.xchch.top/zhangsai/go-101/training/web/middleware/prometheus"
-	"gitlab.xchch.top/zhangsai/go-101/training/web/middleware/recovery"
+	"gitlab.xchch.top/golang-group/go-101/training/web"
+	"gitlab.xchch.top/golang-group/go-101/training/web/middleware/accesslog"
+	"gitlab.xchch.top/golang-group/go-101/training/web/middleware/cors"
+	"gitlab.xchch.top/golang-group/go-101/training/web/middleware/opentelemetry"
+	"gitlab.xchch.top/golang-group/go-101/training/web/middleware/prometheus"
+	"gitlab.xchch.top/golang-group/go-101/training/web/middleware/recovery"
 	"go.uber.org/zap"
 	"net/http"
 )
