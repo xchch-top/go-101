@@ -1,0 +1,12 @@
+Cond原语: 为等待/通知场景下的并发问题提供支持.
+Cond通常应用于等待某个条件的一组goroutine, 等条件变为true的时候, 其中一个goroutine或者所有的goroutine都会被唤醒
+
+Cond是唯一难以掌握的Go并发原语 !!!
+
+Cond 的三个方法
+Broadcast: 允许调用者Caller唤醒所有等待此Cond的goroutine
+Single: 允许调用者Caller唤醒一个等待此Cond的goroutine
+Wait: 会把调用者Caller放入Cond的等待队列中并阻塞, 直到被Single或者Broadcast的方法从等待队列中移除并唤醒
+
+代码演示
+c7_v1 10个运动员在自己的赛道上做好准备, 等所有的运动员都准备好之后, 裁判员才会打响发令枪

@@ -10,8 +10,9 @@ go语言中没有ThreadLocal, goroutine中操作的是协程, go的设计者不�
 Context接口核心四个api
 Deadline: 返回过期时间, 如果ok为false, 说明没有设置过期时间 -- 不常用
 Done: 返回一个channel, 一般用于监听Context实例的信号, 比如说过期, 或者正常关闭 -- 常用
+    如果Done没有被close, Err方法返回nil, 如果Done被close, Error方法会返回Done被close的原因
 Err: 返回一个错误用于表示Context发生了什么, Canceled ==> 正常关闭, DeadlineExceeded ==> 过期超时 -- 比较常用
-context.Value: 取值, 非常常用
+Value: 取值, 非常常用
 
 context包我们就用来做两件事情: ①安全传递数据 ②控制链路
 
@@ -31,6 +32,7 @@ context包提供了三个控制方法: WithCancel, WithDeadline, WithTimeout, �
     ①没有过期时间, 但是又需要在必要的时候取消,  使用WithCancel
     ②在固定时间点过期, 使用WithDeadline
     ③在一段时间后过期, 使用WithTimeout
+不是只有你想中途放弃, 采取调用cancel, 只要你的任务正常完成了, 就需要调用cancel, 这样, 这个context才能释放它的资源.
 父context可以控制子context, 但是子context控制不了父context
 
 time.AfterFunc
@@ -143,7 +145,7 @@ sync - WaitGroup
 WaitGroup是用于同步多个goroutine之间工作的
 常见场景时我们会把任务拆分给多个goroutine并行完成, 在完成之后需要合并这些任务的结果, 或者需要等到所有小任务都完成之后才能进入下一步
     要在开启goroutine之前先加1, 每一个小任务完成就减1, 调用Wait方法来等待所有子任务完成
-    容易犯错的地方就是 +1 和 -1 不匹配, 加多了导致Wait一直阻塞, 引起goroutine泄露, 减多了直接就panic
+    容易犯错的地方就是 +1 和 -1 不匹配, 加多了导致Wait一直阻塞, 引起goroutine泄漏, 减多了直接就panic
 
 WaitGroup细节 src/sync/waitgroup.go#WaitGroup
 ①需要记住当前有多少个任务还没有完成 ②记住当前有多少goroutine调用了wait方法 ③需要一个东西来协调goroutine的行为
@@ -183,12 +185,12 @@ channel的代码案例
     提交任务的时候, 如果执行goroutine满了, 任务池是缓存住这个任务, 还是直接阻塞提交者
     如果缓存, 那么缓存需要多大> 缓存满了又该怎么办?
 
-channel与goroutine泄露
-如果channel使用不当, 会导致goroutine泄露, channel使用不正确的情况
-    ① 只发送不接收, 那么发送者一直阻塞, 会导致发送者goroutine泄露
-    ② 只接收不发送, 那么接受者一直阻塞, 会导致接受者goroutine泄露
-    ③ 读写nil丢回导致goroutine泄露
-基本上可以说, goroutine泄露都是因为goroutine被阻塞之后没有人唤醒它导致的
+channel与goroutine泄漏
+如果channel使用不当, 会导致goroutine泄漏, channel使用不正确的情况
+    ① 只发送不接收, 那么发送者一直阻塞, 会导致发送者goroutine泄漏
+    ② 只接收不发送, 那么接受者一直阻塞, 会导致接受者goroutine泄漏
+    ③ 读写nil丢回导致goroutine泄漏
+基本上可以说, goroutine泄漏都是因为goroutine被阻塞之后没有人唤醒它导致的
 
 channel与内存逃逸
 内存分配: 分配到栈上, 不需要考虑GC, 分配到堆上, 需要考虑GC
@@ -208,5 +210,5 @@ channel结构源码 src/runtime/chan.go#hchan
 
 面试要点
 从nil channel读写数据会怎样? 从已关闭的channel读写数据会怎么样?
-goroutine泄露有什么原因
-为什么channel发送指针数据会引起内存泄露
+goroutine泄漏有什么原因
+为什么channel发送指针数据会引起内存泄漏

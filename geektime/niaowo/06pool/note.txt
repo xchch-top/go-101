@@ -1,0 +1,38 @@
+go是一个自动垃圾回收的编程语言, 采用三色并发标记算法标记对象并回收.
+但是, 如果你想使用go开发一个高性能的应用程序的话, 就必须考虑垃圾回收给性能带来的影响
+go的自动垃圾回收机制有一个STW(stop-the-world)的时间, 而且, 大量地创建在堆上的对象, 也会影响垃圾回收标记的时间.
+
+一般我们做性能优化的时候, 会采用对象池的方式, 把不用的对象回收起来, 避免垃圾回收掉, 这样使用的时候就不必在堆上重新创建了
+像数据库连接, TCP的长连接, 这些连接在创建的时候是一个非常耗时的操作, 我们可以把这些连接保存下来, 避免每次使用的时候都重新创建
+
+sync.Pool数据类型用来保存一组可独立访问的临时对象.
+sync.Pool池化的对象会在未来的某个时候被毫无预兆的移除掉. 而且, 如果没有别的对象引用这个被移除的对象的话, 这个被移除的对象就会被垃圾回收掉
+
+两个注意点
+1. sync.Pool本身就是线程安全的, 多个goroutine可以并发地调用它的方法存取对象
+2. sync.Pool不可在使用之后再复制使用
+
+sync.Pool的三个方法
+New: 当调用Pool的Get方法从翅中获取元素, 没有更多的空间元素可返回, 就会调用这个New方法来创建新的元素.
+    如果你没有设置New字段, 没有更多的空闲元素可返回时, Get方法就会返回nil, 表示当前没有可用的元素
+Get: 从Pool取走一个元素, 这个元素会从Pool中移除, 返回给调用者
+    Get方法除了返回值是正常实例化的元素, Get方法的返回值还可能会使nil(New字段没有设置, 又没有空闲元素可以返回)
+Put: 用于将一个元素返还给Pool, Pool会把这个元素保存到池中, 并且可以复用
+    如果Put一个nil, Pool就会忽略这个值
+
+Pool最重要的两个字段: local和victim
+1. 每次垃圾回收的时候, Pool会把victim中的对象移除, 然后把local的数据给victim, 这样的话, local就会被清空.
+    而victim就像一个垃圾分拣站, 里面的东西可能被当做垃圾丢弃了, 有用的东西也可能被捡回来重新使用
+2. victim中的元素如果被Get取走, 那么这个元素就很幸运, 因为它又活过来了.
+    但是如果这个时候Get的并发不是很大, 元素没有被Get取走, 那么就会被移除掉.
+
+sync.Pool的坑
+1. 内存泄漏: 现象 大量的buffer重复使用没有被回收, 这种现象属于内存泄漏
+    解决方案: 回收buffer的时候, 检查回收对象的大小
+2. 内存浪费: 现象 池子中buffer都比较大, 但是实际使用的时候, 很多时候只需要一个小的buffer
+    解决方案: 将buffer池按照按照元素大小分为多个buffer池
+    开源工具: https://github.com/vitessio/vitess/blob/main/go/bucketpool/bucketpool.go
+
+WorkPool
+fasthttp中的WorkPool https://github.com/valyala/fasthttp/blob/master/workerpool.go
+WorkPool开源实现 https://github.com/gammazero/workerpool

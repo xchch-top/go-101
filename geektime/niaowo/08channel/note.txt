@@ -1,0 +1,23 @@
+channel的5种应用场景
+1. 数据交流: 当做并发的buffer或者queue, 解决生产者-消费者问题, 多个goroutine可以并发当做生产者和消费者
+2. 数据传递: 一个goroutine将数据交给另一个goroutine, 相当于把数据的拥有权托付出去
+3. 信号通知: 一个goroutine可以将信号(closing, closed, data ready等)传递给另一个或另一组goroutine
+4. 功能编排, 可以让一组goroutine按照一定的顺序并发或者串行的执行, 这就是编排的功能
+5. 锁: 利用channel也可以实现互斥锁的机制
+
+channel会panic的三种情况
+close为nil的chan
+send已经是close的chan
+close已经close的chan
+
+只要一个chan还有未读的数据, 即使把它close掉, 你还是可以继续把这些未读的数据消费完, 之后才是读取零值数据
+
+使用channel实现锁
+可以用buffer为1的chan实现互斥锁, 在初始化这个锁的时候往Channel中先塞入一个元素, 谁把这个元素取走, 谁就获取了这把锁, 把元素放回去, 就是释放了锁
+元素放到chan之前, 不会有goroutine能从chan中取走元素, 这就保证了互斥性
+
+代码演示
+c13_v1: goroutine泄漏
+c14_v1: 利用反射操作channel
+c14_v2: channel的应用 - 数据传递
+c14_v3: channel的应用 - 锁

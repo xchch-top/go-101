@@ -15,6 +15,7 @@ require (
 	github.com/gotomicro/ekit v0.0.4
 	github.com/hashicorp/golang-lru v0.5.4
 	github.com/kataras/iris/v12 v12.1.8
+	github.com/marusama/cyclicbarrier v1.1.0
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible
 	github.com/opentracing/opentracing-go v1.2.0
 	github.com/patrickmn/go-cache v2.1.0+incompatible

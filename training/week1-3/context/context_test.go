@@ -94,7 +94,7 @@ func TestContext07(t *testing.T) {
 	fmt.Println(ccFromC, cFromC)
 }
 
-// context中放多个值, 能不能拿到 -- 可以, 不过清楚实际中能不能用
+// context中放多个值, 能不能拿到 -- 可以
 func TestContext08(t *testing.T) {
 	ctx := context.Background()
 	ctx = context.WithValue(ctx, "k1", "v1")
