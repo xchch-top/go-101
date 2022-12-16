@@ -1,10 +1,10 @@
 package main
 
 import (
-	"gitlab.xchch.top/zhangsai/go-101/training/orm"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/middleware/opentelemetry"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/middleware/prometheus"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/middleware/querylog"
+	"gitlab.xchch.top/golang-group/go-101/training/orm"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/middleware/opentelemetry"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/middleware/prometheus"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/middleware/querylog"
 	"go.uber.org/zap"
 )
 

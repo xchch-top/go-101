@@ -1,14 +1,14 @@
 package opentelemetry
 
 import (
-	"gitlab.xchch.top/zhangsai/go-101/training/web"
+	"gitlab.xchch.top/golang-group/go-101/training/web"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/propagation"
 	"go.opentelemetry.io/otel/trace"
 )
 
-const defaultInstrumentationName = "gitlab.xchch.top/zhangsai/go-101/training/web/middle/opentelemetry"
+const defaultInstrumentationName = "gitlab.xchch.top/golang-group/go-101/training/web/middle/opentelemetry"
 
 type MiddlewareBuilder struct {
 	Tracer trace.Tracer

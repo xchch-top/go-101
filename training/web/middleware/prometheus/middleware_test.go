@@ -2,7 +2,7 @@ package prometheus
 
 import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"gitlab.xchch.top/zhangsai/go-101/training/web"
+	"gitlab.xchch.top/golang-group/go-101/training/web"
 	"net/http"
 	"testing"
 	"time"

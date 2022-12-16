@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"gitlab.xchch.top/zhangsai/go-101/training/cache/redis-lock/mocks"
+	"gitlab.xchch.top/golang-group/go-101/training/cache/redis-lock/mocks"
 	"testing"
 	"time"
 

@@ -6,7 +6,7 @@ import (
 	"github.com/DATA-DOG/go-sqlmock"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v3/v2/internal/errs"
+	"gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v3/v2/internal/errs"
 	"testing"
 )
 

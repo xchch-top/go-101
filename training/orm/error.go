@@ -1,6 +1,6 @@
 package orm
 
-import "gitlab.xchch.top/zhangsai/go-101/training/orm/internal/errs"
+import "gitlab.xchch.top/golang-group/go-101/training/orm/internal/errs"
 
 // 将内部的 sentinel error 暴露出去
 var (

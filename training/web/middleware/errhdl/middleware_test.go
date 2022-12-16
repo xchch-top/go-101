@@ -2,7 +2,7 @@ package errhdl
 
 import (
 	"bytes"
-	"gitlab.xchch.top/zhangsai/go-101/training/web"
+	"gitlab.xchch.top/golang-group/go-101/training/web"
 	"html/template"
 	"testing"
 )

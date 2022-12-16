@@ -2,7 +2,7 @@ package orm
 
 import (
 	"github.com/stretchr/testify/assert"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/internal/errs"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/internal/errs"
 	"testing"
 )
 

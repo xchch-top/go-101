@@ -1,7 +1,7 @@
 package errhdl
 
 import (
-	"gitlab.xchch.top/zhangsai/go-101/training/week4-6/web_v7/v1"
+	"gitlab.xchch.top/golang-group/go-101/training/week4-6/web_v7/v1"
 )
 
 type MiddlewareBuilder struct {

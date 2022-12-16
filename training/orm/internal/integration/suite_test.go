@@ -5,7 +5,7 @@ package integration
 import (
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm"
+	"gitlab.xchch.top/golang-group/go-101/training/orm"
 )
 
 type Suite struct {

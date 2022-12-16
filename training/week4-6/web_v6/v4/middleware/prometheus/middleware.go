@@ -3,7 +3,7 @@ package prometheus
 import (
 	"fmt"
 	"github.com/prometheus/client_golang/prometheus"
-	"gitlab.xchch.top/zhangsai/go-101/training/week4-6/web_v6/v4"
+	"gitlab.xchch.top/golang-group/go-101/training/week4-6/web_v6/v4"
 	"time"
 )
 

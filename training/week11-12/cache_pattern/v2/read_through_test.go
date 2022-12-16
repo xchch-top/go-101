@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v10/v2"
+	"gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v10/v2"
 	"strings"
 	"testing"
 	"time"

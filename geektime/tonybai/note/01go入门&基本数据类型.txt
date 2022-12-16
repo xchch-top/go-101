@@ -13,7 +13,7 @@ go代码风格使用Tab而不是空格来实现缩进, go源码文件本身采�
 go.sum记录了直接依赖和间接依赖的版本的hash, 用来校验本地宝的真实性, 在构建的时候, 如果本地依赖包的hash值和go.sum中记录的不一致, 会被拒绝构建
 go程序的构建过程就是确定包版本, 编译以及将编译后的目标文件链接在一起的过程
 
-添加go mod文件 go mod init gitlab.xchch.top/zhangsai/go-101
+添加go mod文件 go mod init gitlab.xchch.top/golang-group/go-101
 手动添加依赖 go get github.com/valyala/fasthttp
 工具自动添加依赖 go mod tidy
 go mod tidy 下载的依赖module会放在本地的module缓存路径下, 变量值为$GOPATH[0]/pkg/mod, go1.15后可以通过GOMODCACHE环境变量自定义本地module的缓存路径

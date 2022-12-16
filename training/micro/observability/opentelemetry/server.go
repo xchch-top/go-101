@@ -2,7 +2,7 @@ package opentelemetry
 
 import (
 	"context"
-	"gitlab.xchch.top/zhangsai/go-101/training/micro/observability"
+	"gitlab.xchch.top/golang-group/go-101/training/micro/observability"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/codes"
@@ -12,7 +12,7 @@ import (
 	"google.golang.org/grpc/metadata"
 )
 
-const instrumentationName = "gitlab.xchch.top/zhangsai/go-101/training/micro/observability/opentelemetry"
+const instrumentationName = "gitlab.xchch.top/golang-group/go-101/training/micro/observability/opentelemetry"
 
 type ServerInterceptorBuilder struct {
 	Tracer trace.Tracer

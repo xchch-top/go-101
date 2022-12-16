@@ -2,7 +2,7 @@ package v1
 
 import (
 	"context"
-	"gitlab.xchch.top/zhangsai/go-101/training/week11-12/local_cache/v1/internal/errs"
+	"gitlab.xchch.top/golang-group/go-101/training/week11-12/local_cache/v1/internal/errs"
 	"sync"
 	"time"
 )

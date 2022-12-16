@@ -1,6 +1,6 @@
 package errhdl
 
-import "gitlab.xchch.top/zhangsai/go-101/training/web"
+import "gitlab.xchch.top/golang-group/go-101/training/web"
 
 type MiddlewareBuilder struct {
 	resp     map[int][]byte

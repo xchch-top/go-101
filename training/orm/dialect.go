@@ -1,7 +1,7 @@
 package orm
 
 import (
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/internal/errs"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/internal/errs"
 )
 
 var (

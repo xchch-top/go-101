@@ -4,9 +4,9 @@ import (
 	"context"
 	"database/sql"
 	"database/sql/driver"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/internal/errs"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/internal/valuer"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/model"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/internal/errs"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/internal/valuer"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/model"
 	"log"
 	"time"
 )

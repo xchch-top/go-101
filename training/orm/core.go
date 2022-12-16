@@ -3,8 +3,8 @@ package orm
 import (
 	"context"
 	"database/sql"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/internal/valuer"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/model"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/internal/valuer"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/model"
 )
 
 type core struct {

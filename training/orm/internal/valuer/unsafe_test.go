@@ -4,9 +4,9 @@ import (
 	"database/sql/driver"
 	"github.com/DATA-DOG/go-sqlmock"
 	"github.com/stretchr/testify/assert"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/internal/errs"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/internal/test"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/model"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/internal/errs"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/internal/test"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/model"
 	"testing"
 )
 

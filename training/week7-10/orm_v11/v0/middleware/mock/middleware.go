@@ -2,7 +2,7 @@ package mock
 
 import (
 	"context"
-	orm "gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v11/v0"
+	orm "gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v11/v0"
 	"time"
 )
 

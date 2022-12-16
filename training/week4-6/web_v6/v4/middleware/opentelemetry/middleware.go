@@ -1,7 +1,7 @@
 package opentelemetry
 
 import (
-	"gitlab.xchch.top/zhangsai/go-101/training/week4-6/web_v6/v4"
+	"gitlab.xchch.top/golang-group/go-101/training/week4-6/web_v6/v4"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/trace"
 )

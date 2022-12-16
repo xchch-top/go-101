@@ -1,7 +1,7 @@
 package micro
 
 import (
-	"gitlab.xchch.top/zhangsai/go-101/training/micro/registry"
+	"gitlab.xchch.top/golang-group/go-101/training/micro/registry"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/resolver"

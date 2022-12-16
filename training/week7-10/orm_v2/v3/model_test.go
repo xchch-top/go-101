@@ -3,7 +3,7 @@ package v3
 import (
 	"fmt"
 	"github.com/stretchr/testify/assert"
-	"gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v2/v3/internal/errs"
+	"gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v2/v3/internal/errs"
 	"reflect"
 	"testing"
 )

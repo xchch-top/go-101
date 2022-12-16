@@ -6,7 +6,7 @@ import (
 	"fmt"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/stretchr/testify/assert"
-	"gitlab.xchch.top/zhangsai/go-101/training/week7-10/orm_v8/v2"
+	"gitlab.xchch.top/golang-group/go-101/training/week7-10/orm_v8/v2"
 	"testing"
 	"time"
 )

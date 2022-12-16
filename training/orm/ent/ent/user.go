@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"entgo.io/ent/dialect/sql"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/ent/ent/user"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/ent/ent/user"
 )
 
 // User is the model entity for the User schema.

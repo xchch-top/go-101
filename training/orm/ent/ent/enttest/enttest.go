@@ -5,12 +5,12 @@ package enttest
 import (
 	"context"
 
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/ent/ent"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/ent/ent"
 	// required by schema hooks.
-	_ "gitlab.xchch.top/zhangsai/go-101/training/orm/ent/ent/runtime"
+	_ "gitlab.xchch.top/golang-group/go-101/training/orm/ent/ent/runtime"
 
 	"entgo.io/ent/dialect/sql/schema"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/ent/ent/migrate"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/ent/ent/migrate"
 )
 
 type (

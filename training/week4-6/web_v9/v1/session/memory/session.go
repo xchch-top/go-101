@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"github.com/patrickmn/go-cache"
-	web "gitlab.xchch.top/zhangsai/go-101/training/week4-6/web_v9/v1"
+	web "gitlab.xchch.top/golang-group/go-101/training/week4-6/web_v9/v1"
 	"sync"
 	"time"
 )

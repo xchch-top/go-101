@@ -10,7 +10,7 @@ import (
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
-	"gitlab.xchch.top/zhangsai/go-101/training/orm/ent/ent/user"
+	"gitlab.xchch.top/golang-group/go-101/training/orm/ent/ent/user"
 )
 
 // ent aliases to avoid import conflicts in user's code.
