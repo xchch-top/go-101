@@ -7,10 +7,8 @@ import (
 	_ "gitlab.xchch.top/golang-group/go-101/cncamp/examples/05init/b"
 )
 
-/**
-* init仅执行一次
-* 有import时, 先执行import中的init方法
- */
+// init仅执行一次
+// 有import时, 先执行import中的init方法
 func init() {
 	// init from b
 	// init from a
