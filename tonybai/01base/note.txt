@@ -1,4 +1,4 @@
-go语言的设计哲学:简单,显式,组合,并发,面向工程.
+go语言的设计哲学: 简单,显式,组合,并发,面向工程.
 
 go env
     https://static001.geekbang.org/resource/image/ba/96/ba6990798fb17fc18386749f9cce2c96.jpg

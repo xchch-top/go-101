@@ -1,6 +1,8 @@
 package main
 
-import "gitlab.xchch.top/golang-group/go-101/geektime/tonybai/method"
+import (
+	"gitlab.xchch.top/golang-group/go-101/tonybai/method"
+)
 
 type Interface interface {
 	M1()
