@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"gitlab.xchch.top/golang-group/go-101/tonybai/method"
 )
 
 func main() {
@@ -79,6 +78,6 @@ func test12() {
 
 	// 类型T的方法集合 = T62的方法集合 + *T63的方法集合
 	// 类型*T的方法集合 = *T62的方法集合 + *T63的方法集合
-	method.DumpMethodSet(t)
-	method.DumpMethodSet(&t)
+	DumpMethodSet(t)
+	DumpMethodSet(&t)
 }

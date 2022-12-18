@@ -1,9 +1,5 @@
 package main
 
-import (
-	"gitlab.xchch.top/golang-group/go-101/tonybai/method"
-)
-
 type Interface interface {
 	M1()
 	M2()
@@ -44,12 +40,12 @@ func test05() {
 // - M4
 func test06() {
 	var n int
-	method.DumpMethodSet(n)
-	method.DumpMethodSet(&n)
+	DumpMethodSet(n)
+	DumpMethodSet(&n)
 
 	var t3 T3
-	method.DumpMethodSet(t3)
-	method.DumpMethodSet(&t3)
+	DumpMethodSet(t3)
+	DumpMethodSet(&t3)
 }
 
 type T3 struct{}
@@ -69,6 +65,6 @@ func test07() {
 	var t T2
 	var pt *T2
 
-	method.DumpMethodSet(t)
-	method.DumpMethodSet(pt)
+	DumpMethodSet(t)
+	DumpMethodSet(pt)
 }
