@@ -1,4 +1,4 @@
-package main
+package mothod_collection
 
 import (
 	"fmt"

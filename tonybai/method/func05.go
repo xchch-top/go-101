@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"gitlab.xchch.top/golang-group/go-101/tonybai/04func_method/mothod_collection"
 
 	"io"
 	"strings"
@@ -102,6 +103,6 @@ func (T5) M3() {}
 func test10() {
 	var t T5
 	var p *T5
-	DumpMethodSet(t)
-	DumpMethodSet(p)
+	mothod_collection.DumpMethodSet(t)
+	mothod_collection.DumpMethodSet(p)
 }

@@ -56,6 +56,4 @@ switch/c20_v2: type switch
 
 跳不出循环的break
 不带label的break语句中断执行并跳出的, 是同一函数内break语句所在的最内层的for, switch或select
-
-代码演示
-switch/c20_v3: 跳不出循环的break
+代码演示 switch/c20_v3: 跳不出循环的break
