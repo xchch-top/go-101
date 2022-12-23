@@ -1,16 +1,17 @@
-package main
+package c33_v3
 
 import (
 	"fmt"
 	"sync"
+	"testing"
 	"time"
 )
 
 // 只读channel和只写channel的使用
 // 生产者和消费者的案例
-func main() {
+func Test_Channel(t *testing.T) {
 	ch := make(chan int, 5)
-	var wg sync.WaitGroup
+	wg := sync.WaitGroup{}
 	wg.Add(2)
 
 	go func() {
