@@ -9,12 +9,14 @@ require (
 	github.com/gin-contrib/sessions v0.0.5
 	github.com/gin-gonic/autotls v0.0.5
 	github.com/gin-gonic/gin v1.8.2
+	github.com/go-playground/validator/v10 v10.11.1
 	github.com/go-redis/redis/v9 v9.0.0-rc.2
 	github.com/go-sql-driver/mysql v1.7.0
 	github.com/golang/mock v1.6.0
 	github.com/google/uuid v1.3.0
 	github.com/gotomicro/ekit v0.0.5
 	github.com/hashicorp/golang-lru v0.5.4
+	github.com/jessevdk/go-assets v0.0.0-20160921144138-4f4301a06e15
 	github.com/kataras/iris/v12 v12.1.8
 	github.com/marusama/cyclicbarrier v1.1.0
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible
@@ -66,7 +68,6 @@ require (
 	github.com/go-openapi/inflect v0.19.0 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/go-playground/universal-translator v0.18.0 // indirect
-	github.com/go-playground/validator/v10 v10.11.1 // indirect
 	github.com/goccy/go-json v0.9.11 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
