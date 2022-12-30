@@ -15,7 +15,7 @@ func Test_Define_Long_format(t *testing.T) {
 		log.Printf("endpoint %v %v %v %v\n", httpMethod, absolutePath, handlerName, nuHandlers)
 	}
 
-	router.GET("ping", func(ctx *gin.Context) {
+	router.GET("/ping", func(ctx *gin.Context) {
 		ctx.String(http.StatusOK, "pong")
 	})
 
