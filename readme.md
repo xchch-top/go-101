@@ -12,5 +12,6 @@ toybai		        go语言第一课代码
 training			go实战训练营代码
 niaowo		        go并发编程实战课代码
 gin                 gin框架的学习代码
+gorm                gorm框架的学习代码
 ```
 

@@ -1,0 +1,6 @@
+## 入门指南
+
+Scanner接口和Valuer接口: 解释见 training/note/网络编程&SQL编程.txt
+
+模型是标准的struct, 由Go的基本数据类型, 实现了Scanner接口和Valuer接口的自定义类型及其指针或别名组成
+gorm倾向于约定由于配置, 默认情况下, 使用id作为主键, 使用结构体名的蛇形复数作为表名, 字段名的蛇形作为列名, 并使用CreateAt, UpdateAt字段追踪创建, 更新时间
