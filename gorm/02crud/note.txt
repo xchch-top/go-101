@@ -1,0 +1,42 @@
+## 创建
+
+数据插入时, 会给对象回填主键
+批量插入可以设置批次的大小
+
+gorm中的钩子函数有 BeforeSave, BeforeCreate, AfterSave, AfterCreate https://gorm.io/zh_CN/docs/hooks.html
+
+## 查询
+
+gorm提供了First、Take、Last方法, 可以从数据库中检索单个对象
+First和Last会根据主键排序, 分别查询第一条和最后一条记录, 只有在目标struct是指针或者通过db.Model执行model时, 改方法才生效
+如果model没有定义主键, 那么将按照model的第一个字段进行排序
+
+注意: 使用struct查询时, gorm只会查询非零字段, 这意味着如果你的字段值为0, "", false或其他零值, 它将不会被用于构建查询条件
+要在查询条件中包含零值, 可以使用映射
+
+## 更新
+
+Save会保存素有的字段, 即使字段是零值
+
+当使用Update更新单个列时, 需要指定条件, 否则返回ErrMissingWhereClause
+通过struct更新时, gorm只会更新非零值, 如果你想确保指定字段被更新, 你应该使用map更新字段, 或者使用select指定要更新的字段
+
+根据id更新时, 数据记录会回填 ??? 没有回填, 只是只是会把部分值赋给对象
+
+gorm中同一个函数中的sql执行会等待吗 ??? 初步判断gorm在执行sql时没有单独启用goroutine, sql是顺序执行
+
+如果没有通过Model指定记录的主键, gorm会执行批量更新
+
+如果您想在更新时跳过hook方法且不追踪更新时间, 可以使用UpdateColumn和UpdateColumns
+
+## 删除
+
+删除一条记录时, 需要指定主键, 否则触发批量delete
+在没有任何条件的情况下执行批量删除, gorm不会执行该删除, 并返回ErrMissingWhereClause错误
+
+如果您的模型包含了一个gorm.DeleteAt字段, 它将自动获得软删除的能力
+
+## SQL构建器
+
+Row用于接收结果为一行的返回
+Rows用于接收结果为多行的返回
