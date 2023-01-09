@@ -18,6 +18,10 @@ func main() {
 		panic("failed to connect database")
 	}
 
+	// 配置数据库连接池
+	// mysql, err := db.DB()
+	// mysql.SetMaxIdleConns(2)
+
 	// 迁移Schema
 	db.AutoMigrate(&Product{})
 
