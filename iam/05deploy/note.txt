@@ -1,0 +1,15 @@
+## 如何制作Docker镜像？
+
+Dockerfile指令详解 https://github.com/marmotedu/geekbang-go/blob/master/Dockerfile指令详解.md
+Dockerfile最佳实践
+
+## 基于github actions的ci实战
+
+awesome-actions https://github.com/sdras/awesome-actions
+github action中文文档 https://docs.github.com/zh/actions
+
+workflow
+
+## 分布式作业系统设计与实现
+
+https://github.com/distribworks/dkron
