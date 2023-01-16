@@ -1,9 +1,9 @@
 package main
 
 import (
+	"gitlab.xchch.top/golang-group/go-101/gorm/04gen/example/conf"
+	"gitlab.xchch.top/golang-group/go-101/gorm/04gen/example/dal"
 	"gorm.io/gen"
-	"gorm.io/gen/examples/conf"
-	"gorm.io/gen/examples/dal"
 )
 
 func init() {
@@ -14,7 +14,7 @@ func init() {
 
 func main() {
 	g := gen.NewGenerator(gen.Config{
-		OutPath: "../../dal/query",
+		OutPath: "/tmp/dal/query",
 	})
 
 	g.UseDB(dal.DB)

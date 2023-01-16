@@ -1,13 +1,13 @@
 package main
 
 import (
+	"gitlab.xchch.top/golang-group/go-101/gorm/04gen/example/dal/model"
 	"gorm.io/gen"
-	"gorm.io/gen/examples/dal/model"
 )
 
 func main() {
 	g := gen.NewGenerator(gen.Config{
-		OutPath: "../../dal/query",
+		OutPath: "/tmp/dal/query",
 		Mode:    gen.WithDefaultQuery,
 	})
 

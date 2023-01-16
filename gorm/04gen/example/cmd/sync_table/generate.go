@@ -3,9 +3,9 @@ package main
 import (
 	"strings"
 
+	"gitlab.xchch.top/golang-group/go-101/gorm/04gen/example/conf"
+	"gitlab.xchch.top/golang-group/go-101/gorm/04gen/example/dal"
 	"gorm.io/gen"
-	"gorm.io/gen/examples/conf"
-	"gorm.io/gen/examples/dal"
 )
 
 func init() {
@@ -30,8 +30,8 @@ var dataMap = map[string]func(detailType string) (dataType string){
 
 func main() {
 	g := gen.NewGenerator(gen.Config{
-		OutPath:      "../../dal/query",
-		ModelPkgPath: "../../dal/model",
+		OutPath:      "gorm/04gen/example/dal/query",
+		ModelPkgPath: "model",
 
 		// generate model global configuration
 		FieldNullable:     true, // generate pointer when field is nullable
@@ -48,7 +48,7 @@ func main() {
 	// generate all field with json tag end with "_example"
 	g.WithJSONTagNameStrategy(func(c string) string { return c + "_example" })
 
-	mytable := g.GenerateModel("mytables")
+	mytable := g.GenerateModel("users")
 	g.ApplyBasic(mytable)
 	// g.ApplyBasic(g.GenerateAllTable()...) // generate all table in db server
 

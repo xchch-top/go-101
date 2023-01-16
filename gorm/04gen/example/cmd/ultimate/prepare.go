@@ -1,18 +1,19 @@
 package main
 
-import (
-	"gorm.io/gorm"
-)
+import "gorm.io/gorm"
 
 // prepare table for test
 
-const mytableSQL = "CREATE TABLE IF NOT EXISTS `mytables` (" +
-	"    `ID` int(11) NOT NULL," +
-	"    `username` varchar(16) DEFAULT NULL," +
-	"    `age` int(8) NOT NULL," +
-	"    `phone` varchar(11) NOT NULL," +
-	"    INDEX `idx_username` (`username`)" +
-	") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"
+const mytableSQL = `create table users (
+id         bigint not null primary key auto_increment,
+name       varchar(20),
+age        bigint,
+birthday   datetime,
+created_at datetime,
+updated_at datetime,
+deleted_at datetime,
+index      idx_deleted_at(deleted_at)
+);`
 
 func prepare(db *gorm.DB) {
 	db.Exec(mytableSQL)

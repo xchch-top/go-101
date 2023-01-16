@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	"gorm.io/gen/examples/biz"
-	"gorm.io/gen/examples/conf"
-	"gorm.io/gen/examples/dal"
-	"gorm.io/gen/examples/dal/query"
+	"gitlab.xchch.top/golang-group/go-101/gorm/04gen/example/biz"
+	"gitlab.xchch.top/golang-group/go-101/gorm/04gen/example/conf"
+	"gitlab.xchch.top/golang-group/go-101/gorm/04gen/example/dal"
+	"gitlab.xchch.top/golang-group/go-101/gorm/04gen/example/dal/query"
 )
 
 func init() {

@@ -1,10 +1,10 @@
 package main
 
 import (
+	"gitlab.xchch.top/golang-group/go-101/gorm/04gen/example/conf"
+	"gitlab.xchch.top/golang-group/go-101/gorm/04gen/example/dal"
+	"gitlab.xchch.top/golang-group/go-101/gorm/04gen/example/dal/model"
 	"gorm.io/gen"
-	"gorm.io/gen/examples/conf"
-	"gorm.io/gen/examples/dal"
-	"gorm.io/gen/examples/dal/model"
 )
 
 func init() {
@@ -20,7 +20,7 @@ var dataMap = map[string]func(detailType string) (dataType string){
 
 func main() {
 	g := gen.NewGenerator(gen.Config{
-		OutPath: "../../dal/query",
+		OutPath: "/tmp/dal/query",
 		Mode:    gen.WithDefaultQuery,
 
 		WithUnitTest: true,
