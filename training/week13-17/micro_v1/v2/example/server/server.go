@@ -12,7 +12,7 @@ import (
 
 func main() {
 	etcdClient, err := clientV3.New(clientV3.Config{
-		Endpoints: []string{"192.168.1.10:2379"},
+		Endpoints: []string{"192.168.1.10:12379"},
 	})
 	if err != nil {
 		panic(err)
