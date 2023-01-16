@@ -40,3 +40,5 @@
 37redirect                              重定向
 38static_file                           静态文件服务
 39static_embed                          静态资源嵌入
+
+gin中间件 https://github.com/gin-gonic/contrib

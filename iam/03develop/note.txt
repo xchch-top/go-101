@@ -1,0 +1,68 @@
+## Web服务：Web服务核心功能有哪些，如何实现？
+
+web服务的基础功能和高级功能 https://static001.geekbang.org/resource/image/1a/2e/1a6d38450cdd0e115e505ab30113602e.jpg
+
+gin框架的特性
+1. 轻量级，代码质量高，性能比较高
+2. 项目目前很活跃，有很多可用的Middleware
+3. 作为一个Web框架，功能齐全，使用起来简单
+
+## 权限模型：五大权限模型是如何进行资源授权的？
+
+权限相关术语 https://static001.geekbang.org/resource/image/6a/1d/6aa623500bb76b3d40a5c4c6d15be91d.jpg
+用户 subject/操作 action/object 资源
+
+5种常见的权限模型：
+权限控制列表（ACL，Access Control List）
+自主访问控制（DAC，Discretionary Access Control）
+强制访问控制（MAC，Mandatory Access Control）
+基于角色的访问控制（RBAC，Role-Based Access Control）
+基于属性的权限验证（ABAC，Attribute—Based Access Control）
+
+简单的权限模型 权限控制列表（ACL）：用来判断用户是否可以对资源做特定的操作
+基于ACL下放权限的权限模型 自主访问控制（DAC）：在ACL的基础上，DAC模型将权限下放，允许拥有权限的Subject自主地将权限授予其他Subject。
+基于ACL且安全性更高的权限模型 强制访问控制（MAC）：subject和object同时具有安全属性
+    在做授权的时候，需要同时满足 subject可以对object做action操作，object可以被subject做action操作
+ACL，DAC和MAC是就旧时代的权限控制模型，无法满足现代应用对权限控制的需求，于是诞生了新时代的权限模型：RBAC和ABAC
+
+最普及的权限模型：基于角色的访问控制（RBAC）
+RBAC0：基础模型，只包含核心的四要素，就是用户，角色，权限，会话。用户和角色可以是多对多的关系，权限和角色也是多对多的关系。
+RBAC1：包括了RBAC0，并且添加了角色继承。角色继承可以继承自其他角色，在拥有其他角色权限的同时，还可以关联额外的权限。
+RBAC2：包括RBAC0，并且添加了约束。
+RBAC3：全功能的RBAC，合并了RBAC0，RBAC1，RBAC2.
+
+最强大的权限模型：基于属性的权限验证
+
+开源项目
+casbin https://github.com/casbin/casbin，
+    go语言编写的访问控制框架，支持ACL，RBAC，ABAC等访问模型
+keto https://github.com/ory/keto
+    云原生权限控制服务，通过提供REST API进行授权，支持RBAC，ACL，Kubernetes Roles等权限模型，
+go-admin https://github.com/go-admin-team/go-admin
+    基于gin+vue+element ui的前后端分离权限系统脚手架，采用了casbin的RBAC访问控制模型
+gin-vue-admin https://github.com/flipped-aurora/gin-vue-admin
+
+api工具 Insomnia
+
+## 数据处理：如何高效处理应用程序产生的数据？
+
+数据采集方式的分类
+同步采集：数据同步实时地上报给目标系统。优点：数据实时上报，采集逻辑简单。缺点：会增加应用程序的请求延时，影响应用性能。
+异步采集：数据异步上报给目标系统。优点：几乎不会对应用程序的性能产生影响。缺点：数据上报有延时，采集逻辑较同步采集复杂。
+
+数据采集流程 https://static001.geekbang.org/resource/image/a9/75/a91db8c7818af0898a1774073e9bfe75.jpg
+1. 采集系统首先需要一个数据源Input，Input可以是一个或者多个，Input中的数据来自于应用程序上报。
+2. 采集后的数据通常需要经过处理，比如格式化，增删字段，过滤无用的数据等，然后将处理后的数据存储到下游系统（Output）中。
+
+数据采集的三个核心问题
+1. 进行数据采集，就需要在正常流程中多加一个上报数据环节，这势必会影响程序的性能，那么如何让程序的性能损失最小化？
+    异步上报和分批上报
+2. 如果Input产生数据的速度大于Output的消费能力，产生数据堆积怎么办？
+    先将数据上报到一些具有高吞吐可以存储大量数据的中间组件，比如kafka，redis。
+3. 数据采集后需要存储到下游系统。在存储之前，我们需要对数据进行不同的处理，并可能会存储到不同的下游系统，这种可变的需求如何满足？
+    将采集程序做成插件化，可扩展的，满足可变的需求。
+
+## SDK设计：如何设计一个优秀的go sdk？
+
+sdk（Software Development Kit，软件开发工具包）
+sdk指封装了后端go服务API接口的软件包，通常包含软件相关的库，文档，使用示例，封装好的API接口和工具。

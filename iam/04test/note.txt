@@ -1,0 +1,53 @@
+## 单元测试：如何编写go语言单元测试和性能测试用例？
+
+testing.T的Error，Errorf，FailNow，Fatal，FatalIf方法用来说明测试不通过；Log，Lof方法用来记录测试信息
+https://static001.geekbang.org/resource/image/b3/ab/b374d392abfe62459d2c22e6ff76c0ab.jpg
+
+go test命令自动搜集所有的测试文件，也就是格式为*_test.go的文件，从中提取全部测试函数并执行。
+-v参数：显示所有测试函数的运行细节。例如 go test -v
+-run：指定要执行的测试函数。例如 go test -v -run="Test_A.*"
+-count N：指定执行测试函数的次数。例如 go test -v -run="Test_A.*" -count=2
+
+性能测试
+go test默认不会执行性能测试函数，需要-bench来运行性能测试函数。例如 go test -bench -run="Benchmark_Rand.*"
+Benchmark_RandInt-8     8表示有8个CPU线程参与了此次测试，默认是GOMAXPROCS的值
+87068196                说明函数中的循环执行了87068196次
+13.86 ns/op             值越小，说明代码的性能越高
+
+性能测试支持的4个参数
+benchmem：输出内存分配统计                       例如 go test -bench -run="Benchmark_Rand.*" -benchmem
+benchtime：指定测试时间或循环执行次数             例如 go test -bench -run="Benchmark_Rand.*" -benchtime=10s/100x
+cpu：指定GOMAXPROCS
+timeout：指定测试函数执行的超时时间               例如 go test -bench -run="Benchmark_Rand.*" -timeout=10s
+
+代码演示：c36_test/v1
+
+go test工具
+
+## 代码测试：go语言其他测试类型
+
+单元测试，性能测试，示例测试，TestMain函数是go test支持的测试类型。
+
+生成测试覆盖率数据 go test -coverprofile=coverage -coverpkg ./...
+分析覆盖率文件 go tool cover -html=coverage -o coverage.html
+
+测试框架
+testify https://github.com/stretchr/testify
+
+## 性能分析：如何分析go语言代码的性能？
+
+生成性能数据文件有三种方法：通过命令行，通过代码和通过net/http/pprof包
+1. 命令行 go test -bench=".*" -cpuprofile cpu.profile -memprofile mem.profile
+    命令会在当前目录生成3个文件 v1.test cpu.profile mem.profile
+2. 代码方式 go test .\pprof_test.go
+    运行程序后会生成两个文件 cpu.out mem.out
+3. 在web应用中集成pprof功能， 访问 http://localhost:8080/debug/pprof/
+
+性能分析工具 pprof
+pprof是一个go程序性能分析工具，用它可以访问并分析性能数据文件。
+go在语言层面上集成了profile采样工具，只需在代码中简单引入runtime/profile或者net/http/pprof包，即可获取程序的profile文件
+net/http/pprof基于runtime/pprof包进行封装，并在http端口上暴露出来
+
+go tool pprof -svg cpu.profile > cpu.svg
+go tool pprof -pdf cpu.profile > cpu.pdf
+go tool pprof -png cpu.profile > cpu.png
